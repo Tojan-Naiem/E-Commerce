@@ -5,6 +5,7 @@ using E_Commerce.Model;
 using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace E_Commerce.Controllers
 {
@@ -56,6 +57,15 @@ namespace E_Commerce.Controllers
             category.Status = (category.Status == Status.Active) ? Status.In_active : Status.Active;
             _dbContext.SaveChanges();
             return Ok(new { message = "Updated Successfully" });
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(long id)
+        {
+            var category = _dbContext.Categories.Find(id);
+            if (category is null) return NotFound(new { message = "Category id not found" });
+             _dbContext.Categories.Remove(category);
+            _dbContext.SaveChanges();
+            return Ok(new { message = "Deleted Successfully" });
         }
     }
 }
