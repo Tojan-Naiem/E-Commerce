@@ -165,3 +165,10 @@ C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce\bin
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce\bin\Debug\net9.0\Mapster.dll
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce\bin\Debug\net9.0\Mapster.Core.dll
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce\obj\Debug\net9.0\E-Commerce.sourcelink.json
+C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce\bin\Debug\net9.0\ar\E-Commerce.resources.dll
+C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce\bin\Debug\net9.0\Microsoft.Extensions.Localization.dll
+C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce\bin\Debug\net9.0\Microsoft.Extensions.Localization.Abstractions.dll
+C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce\obj\Debug\net9.0\E-Commerce.csproj.GenerateResource.cache
+C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce\obj\Debug\net9.0\ar\E-Commerce.resources.dll
+C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce\obj\Debug\net9.0\E_Commerce.Resources.SharedResources.resources
+C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce\obj\Debug\net9.0\E_Commerce.Resources.SharedResources.ar.resources

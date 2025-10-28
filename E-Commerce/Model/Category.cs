@@ -2,6 +2,7 @@
 {
     public class Category:BaseModel
     {
-        public string Name { get; set; }
+        public string? NameEn { get; set; }
+        public string? NameAr { get; set; }
     }
 }
