@@ -1,10 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using E_Commerce.Model;
+using System.ComponentModel.DataAnnotations;
 
 namespace E_Commerce.DTO.Response
 {
     public class CategoryResponseDTO
     {
-        public long Id { get; set; }
-        public string? Name { get; set; }
+        public Status Status = Status.Active;
+        public int Id { get; set; }
+        public List<CategoryTranslationResponse> CategoryTranslationResponses { get; set; }
+            = new List<CategoryTranslationResponse>();
+     
     }
 }

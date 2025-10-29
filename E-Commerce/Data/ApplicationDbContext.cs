@@ -1,4 +1,5 @@
 ﻿using E_Commerce.Model;
+using E_Commerce.Model.Category;
 using Microsoft.EntityFrameworkCore;
 
 namespace E_Commerce.Data
@@ -7,6 +8,8 @@ namespace E_Commerce.Data
     {
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<CategoryTranslation> CategoryTranslations { get; set; }
+
 
         public ApplicationDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
         {
