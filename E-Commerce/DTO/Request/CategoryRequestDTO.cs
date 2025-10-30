@@ -6,7 +6,7 @@ namespace E_Commerce.DTO.Request
     public class CategoryRequestDTO
     {
         public Status Status = Status.Active;
-        public List<CategoryTranslationRequest> CategoryTranslationRequests { get; set; } 
+        public List<CategoryTranslationRequest> categoryTranslations { get; set; } 
             = new List<CategoryTranslationRequest>();
     }
 }

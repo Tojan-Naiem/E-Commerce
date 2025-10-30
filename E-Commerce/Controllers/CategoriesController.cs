@@ -30,15 +30,21 @@ namespace E_Commerce.Controllers
         [HttpGet]
         public async Task<ActionResult<List<CategoryResponseDTO>>> GetAll()
         {
-        
-
             var categories = _dbContext.Categories
                 .Include(c=>c.categoryTranslations)
-                .Where(c=>c.Status==Status.Active)
                 .OrderByDescending(c=>c.CreatedAt)
-                .ToList().Adapt< CategoryResponseDTO>();
+                .ToList();
+            var categoryDTOs = categories.Select(c => new CategoryResponseDTO
+            {
+                Id = c.Id,
+                CategoryTranslationResponses = c.categoryTranslations.Select(t => new CategoryTranslationResponse
+                {
+                    Name = t.Name,
+                    Language = t.Language
+                }).ToList()
+            }).ToList();
             Console.WriteLine(_localizer["Success"].Value);
-            return Ok(new {message= _localizer["Success"].Value,categories} );     
+            return Ok(new {message= _localizer["Success"].Value,categoryDTOs} );     
 
         }
         [HttpGet("{id}")]
@@ -51,13 +57,22 @@ namespace E_Commerce.Controllers
         [HttpPost]
         public async Task<IActionResult>  Create([FromBody]CategoryRequestDTO categoryDTO)
         {
-            var culture = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
 
-            Category category =categoryDTO.Adapt<Category>();
-            //if (culture == "ar")
-            //    category.NameAr = categoryDTO.Name;
-            //else category.NameEn = categoryDTO.Name;
-             await _dbContext.Categories.AddAsync(category);
+            Category category = new Category()
+            {
+                Status = categoryDTO.Status,
+                categoryTranslations = categoryDTO.categoryTranslations.Select(
+                   t => new CategoryTranslation()
+                   {
+                       Name = t.Name,
+                       Language = t.Language
+                   }
+                    ).ToList()
+            };
+
+            Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(categoryDTO));
+            Console.WriteLine("1111111111111111111111");
+            await _dbContext.Categories.AddAsync(category);
 
             _dbContext.SaveChanges();
             return StatusCode(StatusCodes.Status201Created);

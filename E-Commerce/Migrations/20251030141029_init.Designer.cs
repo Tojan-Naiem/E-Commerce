@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Commerce.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251028212548_add category translation")]
-    partial class addcategorytranslation
+    [Migration("20251030141029_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,9 +54,6 @@ namespace E_Commerce.Migrations
 
                     b.Property<long>("CategoryId")
                         .HasColumnType("bigint");
-
-                    b.Property<int>("I")
-                        .HasColumnType("int");
 
                     b.Property<string>("Language")
                         .IsRequired()

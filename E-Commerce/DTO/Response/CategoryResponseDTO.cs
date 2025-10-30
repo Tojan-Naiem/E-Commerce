@@ -6,7 +6,7 @@ namespace E_Commerce.DTO.Response
     public class CategoryResponseDTO
     {
         public Status Status = Status.Active;
-        public int Id { get; set; }
+        public long Id { get; set; }
         public List<CategoryTranslationResponse> CategoryTranslationResponses { get; set; }
             = new List<CategoryTranslationResponse>();
      

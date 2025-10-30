@@ -52,9 +52,6 @@ namespace E_Commerce.Migrations
                     b.Property<long>("CategoryId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("I")
-                        .HasColumnType("int");
-
                     b.Property<string>("Language")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

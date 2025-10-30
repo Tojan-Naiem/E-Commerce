@@ -224,7 +224,7 @@
       "CategoryRequestDTO": {
         "type": "object",
         "properties": {
-          "categoryTranslationRequests": {
+          "categoryTranslations": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CategoryTranslationRequest"
@@ -239,7 +239,7 @@
         "properties": {
           "id": {
             "type": "integer",
-            "format": "int32"
+            "format": "int64"
           },
           "categoryTranslationResponses": {
             "type": "array",
