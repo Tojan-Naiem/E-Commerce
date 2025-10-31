@@ -10,6 +10,16 @@
         "tags": [
           "Categories"
         ],
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",

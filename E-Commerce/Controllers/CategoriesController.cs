@@ -28,7 +28,7 @@ namespace E_Commerce.Controllers
             _localizer = localizer;
         }
         [HttpGet]
-        public async Task<ActionResult<List<CategoryResponseDTO>>> GetAll()
+        public async Task<ActionResult<List<CategoryResponseDTO>>> GetAll([FromQuery]string lang="en")
         {
             var categories = _dbContext.Categories
                 .Include(c=>c.categoryTranslations)
@@ -37,7 +37,9 @@ namespace E_Commerce.Controllers
             var categoryDTOs = categories.Select(c => new CategoryResponseDTO
             {
                 Id = c.Id,
-                CategoryTranslationResponses = c.categoryTranslations.Select(t => new CategoryTranslationResponse
+                CategoryTranslationResponses = c.categoryTranslations
+                .Where(t=>t.Language==lang)
+                .Select(t => new CategoryTranslationResponse
                 {
                     Name = t.Name,
                     Language = t.Language
@@ -70,27 +72,45 @@ namespace E_Commerce.Controllers
                     ).ToList()
             };
 
-            Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(categoryDTO));
-            Console.WriteLine("1111111111111111111111");
             await _dbContext.Categories.AddAsync(category);
 
             _dbContext.SaveChanges();
             return StatusCode(StatusCodes.Status201Created);
         }
         [HttpPatch("{id}")]
-        public IActionResult UpdateCategoryName([FromRoute]long id, [FromBody] CategoryRequestDTO categoryRequestDTO)
+        public IActionResult Update([FromRoute]long id, [FromBody] CategoryRequestDTO categoryRequestDTO)
         {
-            var category = _dbContext.Categories.Find(id);
+            var category = _dbContext.Categories.Include(c=>c.categoryTranslations).FirstOrDefault(c=>c.Id==id);
             if (category is null) return NotFound(new { message = _localizer["not found"].Value });
-            var culture = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
-            if(culture == "ar")
-            {
-             //   category.NameAr = ((categoryRequestDTO.Name == null) ? category.NameAr : categoryRequestDTO.Name);
+            category.Status = categoryRequestDTO.Status;
+            Console.WriteLine(category.Id);
 
+            foreach(var categoryRequest in categoryRequestDTO.categoryTranslations)
+            {
+                Console.WriteLine("1");
+                var existingTranslation = category.categoryTranslations.FirstOrDefault(c => c.Language == categoryRequest.Language);
+                Console.WriteLine(existingTranslation);
+                if(existingTranslation is not null)
+                {
+                    existingTranslation.Name = categoryRequest.Name;
+                    Console.WriteLine(existingTranslation.Name);
+                }
+                else
+                {
+                    category.categoryTranslations.Add(
+                        new CategoryTranslation
+                        {
+                            Name = categoryRequest.Name,
+                            Language = categoryRequest.Language,
+                            CategoryId = category.Id
+                        }
+                        );
+
+
+                }
             }
-            else 
-               // category.NameEn = ((categoryRequestDTO.Name == null) ? category.NameEn : categoryRequestDTO.Name);
             _dbContext.SaveChanges();
+          
             return Ok(new { message = _localizer["Updated"].Value });
         }
         [HttpPatch("{id}/toggle-status")]

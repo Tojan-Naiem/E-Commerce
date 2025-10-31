@@ -16,6 +16,13 @@ builder.Services.Configure<RequestLocalizationOptions>(options => {
     options.SupportedCultures = supportedCultures;
     options.SupportedUICultures = supportedCultures;
     options.RequestCultureProviders.Insert(0, new QueryStringRequestCultureProvider());
+    options.RequestCultureProviders = new List<IRequestCultureProvider>
+  {
+      new QueryStringRequestCultureProvider()
+      {
+          QueryStringKey = "lang"
+      },
+  };
 
 });
 
@@ -36,6 +43,7 @@ builder.Services.AddOpenApi();
 // add db context configuration
 builder.Services.AddDbContext<ApplicationDbContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")
+  
     ));
 var app = builder.Build();
 app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);

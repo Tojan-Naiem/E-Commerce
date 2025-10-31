@@ -6,7 +6,13 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "lang",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.List\u00601[[E_Commerce.DTO.Response.CategoryResponseDTO, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
@@ -53,7 +59,7 @@
   },
   {
     "ContainingType": "E_Commerce.Controllers.CategoriesController",
-    "Method": "UpdateCategoryName",
+    "Method": "Update",
     "RelativePath": "api/Categories/{id}",
     "HttpMethod": "PATCH",
     "IsController": true,
