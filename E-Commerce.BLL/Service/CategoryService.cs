@@ -1,4 +1,6 @@
-﻿using E_Commerce.Data;
+﻿using E_Commerce.BLL.Service;
+using E_Commerce.DAL.Repository;
+using E_Commerce.Data;
 using E_Commerce.DTO.Request;
 using E_Commerce.DTO.Response;
 using E_Commerce.Model;
@@ -14,23 +16,20 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.BLL.Repository
 {
-    public class CategoryRepository
+    public class CategoryService: ICategoryService
     {
 
-        private readonly ApplicationDbContext _dbContext;
-        public CategoryRepository(
-            ApplicationDbContext dbContext
+        private readonly CategoryRepository _categoryRepository;
+        public CategoryService(
+             CategoryRepository categoryRepository
        )
         {
-            _dbContext = dbContext;
+            _categoryRepository = categoryRepository;
         }
         
         public async Task<List<CategoryResponseDTO>> GetAll(string lang="en")
         {
-            var categories = _dbContext.Categories
-                .Include(c => c.categoryTranslations)
-                .OrderByDescending(c => c.CreatedAt)
-                .ToList();
+            var categories = await _categoryRepository.GetAllCategories(lang);
             var categoryDTOs = categories.Select(c => new CategoryResponseDTO
             {
                 Id = c.Id,
@@ -47,7 +46,7 @@ namespace E_Commerce.BLL.Repository
         }
         public CategoryResponseDTO GetCategory(long id)
         {
-            var category = _dbContext.Categories.Find(id);
+            var category = _categoryRepository.GetCategoryByIdWithDetails(id);
             if (category is null) return null;
             return category.Adapt<CategoryResponseDTO>();
         }
@@ -65,13 +64,11 @@ namespace E_Commerce.BLL.Repository
                    }
                     ).ToList()
             };
-             _dbContext.Categories.AddAsync(category);
-            _dbContext.SaveChanges();
-
+            _categoryRepository.SaveCategory(category);
         }
         public async Task<bool> Update( long id, CategoryRequestDTO categoryRequestDTO)
         {
-            var category = _dbContext.Categories.Include(c => c.categoryTranslations).FirstOrDefault(c => c.Id == id);
+            var category = _categoryRepository.GetCategoryByIdWithDetails(id);
             if (category is null) return false;
             category.Status = categoryRequestDTO.Status;
 
@@ -99,25 +96,24 @@ namespace E_Commerce.BLL.Repository
 
                 }
             }
-            _dbContext.SaveChanges();
+            _categoryRepository.SaveChangesInDatabase();
 
             return true;
         }
 
         public async Task<bool> ToggleStatus(long id)
         {
-            var category = _dbContext.Categories.Find(id);
+            var category = _categoryRepository.GetCategoryById(id);
             if (category is null) return false;
             category.Status = (category.Status == Status.Active) ? Status.In_active : Status.Active;
-            _dbContext.SaveChanges();
+            _categoryRepository.SaveChangesInDatabase();
             return true;
         }
         public async Task<bool> Delete(long id)
         {
-            var category = _dbContext.Categories.Find(id);
+            var category = _categoryRepository.GetCategoryById(id);
             if (category is null) return false;
-            _dbContext.Categories.Remove(category);
-            _dbContext.SaveChanges();
+            _categoryRepository.RemoveCategory(category);
             return true;
         }
     }

@@ -18,14 +18,14 @@ namespace E_Commerce.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        private readonly CategoryRepository _categoryRepository;
+        private readonly CategoryService _categoryService;
         private readonly IStringLocalizer<SharedResources> _localizer;
 
         public CategoriesController(
-          CategoryRepository categoryRepository,
+          CategoryService categoryService,
            IStringLocalizer<SharedResources> localizer)
         {
-            _categoryRepository = categoryRepository;
+            _categoryService = categoryService;
             _localizer = localizer;
 
 
@@ -33,41 +33,41 @@ namespace E_Commerce.Controllers
         [HttpGet]
         public async Task<ActionResult<List<CategoryResponseDTO>>> GetAll([FromQuery]string lang="en")
         {
-            var categoryDTOs = _categoryRepository.GetAll(lang);
+            var categoryDTOs = _categoryService.GetAll(lang);
             return Ok(new {message= _localizer["Success"].Value,categoryDTOs} );     
 
         }
         [HttpGet("{id}")]
         public IActionResult GetCategory([FromRoute] long id)
         {
-            CategoryResponseDTO categoryResponseDTO= _categoryRepository.GetCategory(id);
+            CategoryResponseDTO categoryResponseDTO= _categoryService.GetCategory(id);
             if (categoryResponseDTO is null) return NotFound(new { message = _localizer["not found"].Value });
             return Ok(categoryResponseDTO);
         }
         [HttpPost]
         public async Task<IActionResult>  Create([FromBody]CategoryRequestDTO categoryDTO)
         {
-             _categoryRepository.Create(categoryDTO);
+             _categoryService.Create(categoryDTO);
             return StatusCode(StatusCodes.Status201Created);
         }
         [HttpPatch("{id}")]
         public async Task<IActionResult> Update([FromRoute]long id, [FromBody] CategoryRequestDTO categoryRequestDTO)
         {
-            bool isExist = await _categoryRepository.Update(id, categoryRequestDTO);
+            bool isExist = await _categoryService.Update(id, categoryRequestDTO);
             if (isExist is false) return NotFound(new { message = _localizer["not found"].Value });
             return Ok(new { message = _localizer["Updated"].Value });
         }
         [HttpPatch("{id}/toggle-status")]
         public async Task<IActionResult> ToggleStatus([FromRoute] long id)
         {
-            bool isExist = await _categoryRepository.ToggleStatus(id);
+            bool isExist = await _categoryService.ToggleStatus(id);
             if (isExist is false) return NotFound(new { message = _localizer["not found"].Value });
             return Ok(new { message = _localizer["Updated"].Value });
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] long id)
         {
-            bool isExist = await _categoryRepository.Delete(id);
+            bool isExist = await _categoryService.Delete(id);
             if (isExist is false) return NotFound(new { message = _localizer["not found"].Value });
             return Ok(new { message = _localizer["Deleted"].Value });
         }

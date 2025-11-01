@@ -1,4 +1,5 @@
 using E_Commerce.BLL.Repository;
+using E_Commerce.DAL.Repository;
 using E_Commerce.Data;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
@@ -26,7 +27,9 @@ builder.Services.Configure<RequestLocalizationOptions>(options => {
   };
 
 });
+builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<CategoryRepository>();
+
 
 
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
