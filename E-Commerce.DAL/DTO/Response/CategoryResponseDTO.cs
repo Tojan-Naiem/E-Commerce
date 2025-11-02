@@ -7,8 +7,7 @@ namespace E_Commerce.DTO.Response
     {
         public Status Status = Status.Active;
         public long Id { get; set; }
-        public List<CategoryTranslationResponse> CategoryTranslationResponses { get; set; }
-            = new List<CategoryTranslationResponse>();
-     
+        public string? Name { get; set; }
+
     }
 }

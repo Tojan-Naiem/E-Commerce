@@ -6,7 +6,8 @@ namespace E_Commerce.DTO.Request
     public class CategoryRequestDTO
     {
         public Status Status = Status.Active;
-        public List<CategoryTranslationRequest> categoryTranslations { get; set; } 
-            = new List<CategoryTranslationRequest>();
+        [Required]
+        [MinLength(2, ErrorMessage = "The name must be more than 2 chars")]
+        public string? Name { get; set; }
     }
 }

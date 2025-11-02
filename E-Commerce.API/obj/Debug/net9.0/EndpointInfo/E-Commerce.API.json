@@ -193,14 +193,14 @@
   "components": {
     "schemas": {
       "CategoryRequestDTO": {
+        "required": [
+          "name"
+        ],
         "type": "object",
         "properties": {
-          "categoryTranslations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CategoryTranslationRequest"
-            },
-            "nullable": true
+          "name": {
+            "minLength": 2,
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -212,44 +212,7 @@
             "type": "integer",
             "format": "int64"
           },
-          "categoryTranslationResponses": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CategoryTranslationResponse"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "CategoryTranslationRequest": {
-        "required": [
-          "name"
-        ],
-        "type": "object",
-        "properties": {
           "name": {
-            "minLength": 2,
-            "type": "string"
-          },
-          "language": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "CategoryTranslationResponse": {
-        "required": [
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "name": {
-            "minLength": 2,
-            "type": "string"
-          },
-          "language": {
             "type": "string",
             "nullable": true
           }

@@ -29,73 +29,41 @@ namespace E_Commerce.BLL.Repository
         
         public async Task<List<CategoryResponseDTO>> GetAll(string lang="en")
         {
-            var categories = await _categoryRepository.GetAllCategories(lang);
+            var categories = await _categoryRepository.GetAll(lang);
             var categoryDTOs = categories.Select(c => new CategoryResponseDTO
             {
                 Id = c.Id,
-                CategoryTranslationResponses = c.categoryTranslations
-                .Where(t => t.Language == lang)
-                .Select(t => new CategoryTranslationResponse
-                {
-                    Name = t.Name,
-                    Language = t.Language
-                }).ToList()
+                Name = c.Name,
+              
             }).ToList();
             return categoryDTOs;
 
         }
         public CategoryResponseDTO GetCategory(long id)
         {
-            var category = _categoryRepository.GetCategoryByIdWithDetails(id);
+            var category = _categoryRepository.GetById(id);
             if (category is null) return null;
             return category.Adapt<CategoryResponseDTO>();
         }
-        public void Create(CategoryRequestDTO categoryDTO)
+        public async Task Create(CategoryRequestDTO categoryDTO)
         {
 
             Category category = new Category()
             {
                 Status = categoryDTO.Status,
-                categoryTranslations = categoryDTO.categoryTranslations.Select(
-                   t => new CategoryTranslation()
-                   {
-                       Name = t.Name,
-                       Language = t.Language
-                   }
-                    ).ToList()
+                   Name = categoryDTO.Name,
+                     
             };
-            _categoryRepository.SaveCategory(category);
+            await _categoryRepository.Save(category);
         }
         public async Task<bool> Update( long id, CategoryRequestDTO categoryRequestDTO)
         {
-            var category = _categoryRepository.GetCategoryByIdWithDetails(id);
+            var category = _categoryRepository.GetById(id);
             if (category is null) return false;
             category.Status = categoryRequestDTO.Status;
+            category.Name = categoryRequestDTO.Name;
 
-            foreach (var categoryRequest in categoryRequestDTO.categoryTranslations)
-            {
-
-                var existingTranslation = category.categoryTranslations.FirstOrDefault(c => c.Language == categoryRequest.Language);
-                Console.WriteLine(existingTranslation);
-                if (existingTranslation is not null)
-                {
-                    existingTranslation.Name = categoryRequest.Name;
-
-                }
-                else
-                {
-                    category.categoryTranslations.Add(
-                        new CategoryTranslation
-                        {
-                            Name = categoryRequest.Name,
-                            Language = categoryRequest.Language,
-                            CategoryId = category.Id
-                        }
-                        );
-
-
-                }
-            }
+         
             _categoryRepository.SaveChangesInDatabase();
 
             return true;
@@ -103,7 +71,7 @@ namespace E_Commerce.BLL.Repository
 
         public async Task<bool> ToggleStatus(long id)
         {
-            var category = _categoryRepository.GetCategoryById(id);
+            var category = _categoryRepository.GetById(id);
             if (category is null) return false;
             category.Status = (category.Status == Status.Active) ? Status.In_active : Status.Active;
             _categoryRepository.SaveChangesInDatabase();
@@ -111,9 +79,9 @@ namespace E_Commerce.BLL.Repository
         }
         public async Task<bool> Delete(long id)
         {
-            var category = _categoryRepository.GetCategoryById(id);
+            var category = _categoryRepository.GetById(id);
             if (category is null) return false;
-            _categoryRepository.RemoveCategory(category);
+            _categoryRepository.Remove(category);
             return true;
         }
     }

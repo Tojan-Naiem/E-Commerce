@@ -8,9 +8,6 @@ namespace E_Commerce.Data
     {
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<CategoryTranslation> CategoryTranslations { get; set; }
-
-
         public ApplicationDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
         {
 

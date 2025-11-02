@@ -12,7 +12,7 @@ namespace E_Commerce.BLL.Service
     {
         public  Task<List<CategoryResponseDTO>> GetAll(string lang = "en");
         public CategoryResponseDTO GetCategory(long id);
-        public void Create(CategoryRequestDTO categoryDTO);
+        public Task Create(CategoryRequestDTO categoryDTO);
         public Task<bool> Update(long id, CategoryRequestDTO categoryRequestDTO);
         public  Task<bool> ToggleStatus(long id);
         public  Task<bool> Delete(long id);
