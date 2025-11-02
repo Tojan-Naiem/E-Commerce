@@ -1,5 +1,6 @@
 using E_Commerce.BLL.Repository;
 using E_Commerce.DAL.Repository;
+using E_Commerce.DAL.Repository.Classes;
 using E_Commerce.Data;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
@@ -7,28 +8,11 @@ using Microsoft.Extensions.Options;
 using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
-const string defaultCulture = "en";
-var supportedCultures = new[]
-{
-    new CultureInfo(defaultCulture),
-    new CultureInfo("ar")
-};
-builder.Services.Configure<RequestLocalizationOptions>(options => {
-    options.DefaultRequestCulture = new RequestCulture(defaultCulture);
-    options.SupportedCultures = supportedCultures;
-    options.SupportedUICultures = supportedCultures;
-    options.RequestCultureProviders.Insert(0, new QueryStringRequestCultureProvider());
-    options.RequestCultureProviders = new List<IRequestCultureProvider>
-  {
-      new QueryStringRequestCultureProvider()
-      {
-          QueryStringKey = "lang"
-      },
-  };
 
-});
 builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<CategoryRepository>();
+builder.Services.AddScoped<BrandRepository>();
+
 
 
 
