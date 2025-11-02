@@ -64,7 +64,7 @@ namespace E_Commerce.BLL.Repository
             category.Name = categoryRequestDTO.Name;
 
          
-            _categoryRepository.SaveChangesInDatabase();
+            await _categoryRepository.SaveChangesInDatabase();
 
             return true;
         }
