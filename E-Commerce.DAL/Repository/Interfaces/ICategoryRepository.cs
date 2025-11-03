@@ -1,5 +1,5 @@
-﻿using E_Commerce.DAL.Repository.Interfaces;
-using E_Commerce.Model.Category;
+﻿using E_Commerce.DAL.Model;
+using E_Commerce.DAL.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

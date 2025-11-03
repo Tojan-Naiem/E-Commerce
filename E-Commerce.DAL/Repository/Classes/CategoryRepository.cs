@@ -1,8 +1,8 @@
-﻿using E_Commerce.DAL.Repository.Classes;
+﻿using E_Commerce.DAL.Model;
+using E_Commerce.DAL.Repository.Classes;
 using E_Commerce.Data;
 using E_Commerce.DTO.Request;
 using E_Commerce.DTO.Response;
-using E_Commerce.Model.Category;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

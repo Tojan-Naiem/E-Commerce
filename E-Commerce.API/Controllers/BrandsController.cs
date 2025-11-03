@@ -1,5 +1,7 @@
 ﻿using E_Commerce.BLL.Repository;
 using E_Commerce.BLL.Service.Classes;
+using E_Commerce.DAL.DTO.Request;
+using E_Commerce.DAL.DTO.Response;
 using E_Commerce.DTO.Request;
 using E_Commerce.DTO.Response;
 using Microsoft.AspNetCore.Mvc;
@@ -12,11 +14,11 @@ namespace E_Commerce.Controllers
     {
         private readonly BrandService _brandService;
 
-        public CategoriesController(
-          CategoryService categoryService
+        public BrandsController(
+          BrandService brandService
           )
         {
-            _brandService = categoryService;
+            _brandService = brandService;
 
 
         }
@@ -28,22 +30,22 @@ namespace E_Commerce.Controllers
 
         }
         [HttpGet("{id}")]
-        public IActionResult GetCategory([FromRoute] long id)
+        public IActionResult Get([FromRoute] long id)
         {
-            CategoryResponseDTO categoryResponseDTO = _brandService.GetCategory(id);
-            if (categoryResponseDTO is null) return NotFound();
-            return Ok(categoryResponseDTO);
+            BrandResponseDTO brandResponseDTO = _brandService.GetById(id);
+            if (brandResponseDTO is null) return NotFound();
+            return Ok(brandResponseDTO);
         }
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CategoryRequestDTO categoryDTO)
+        public async Task<IActionResult> Create([FromBody] BrandRequestDTO brandRequestDTO)
         {
-            await _brandService.Create(categoryDTO);
+            await _brandService.Create(brandRequestDTO);
             return StatusCode(StatusCodes.Status201Created);
         }
         [HttpPatch("{id}")]
-        public async Task<IActionResult> Update([FromRoute] long id, [FromBody] CategoryRequestDTO categoryRequestDTO)
+        public async Task<IActionResult> Update([FromRoute] long id, [FromBody] BrandRequestDTO brandRequestDTO)
         {
-            bool isExist = await _brandService.Update(id, categoryRequestDTO);
+            bool isExist = await _brandService.Update(id, brandRequestDTO);
             if (isExist is false) return NotFound(new { message = "Not found" });
             return Ok(new { message = "Updated" });
         }
