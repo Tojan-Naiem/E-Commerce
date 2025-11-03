@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "y8mCnJMgyvY=",
+  "dgSpecHash": "R1y9Zj3RhuY=",
   "success": true,
   "projectFilePath": "C:\\Users\\Tojan AboGhola\\Desktop\\asp .net course\\course\\E-Commerce\\E-Commerce.API\\E-Commerce.API.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,9 @@
     "C:\\Users\\Tojan AboGhola\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Tojan AboGhola\\.nuget\\packages\\mapster\\7.4.0\\mapster.7.4.0.nupkg.sha512",
     "C:\\Users\\Tojan AboGhola\\.nuget\\packages\\mapster.core\\1.2.1\\mapster.core.1.2.1.nupkg.sha512",
+    "C:\\Users\\Tojan AboGhola\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\9.0.10\\microsoft.aspnetcore.cryptography.internal.9.0.10.nupkg.sha512",
+    "C:\\Users\\Tojan AboGhola\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\9.0.10\\microsoft.aspnetcore.cryptography.keyderivation.9.0.10.nupkg.sha512",
+    "C:\\Users\\Tojan AboGhola\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\9.0.10\\microsoft.aspnetcore.identity.entityframeworkcore.9.0.10.nupkg.sha512",
     "C:\\Users\\Tojan AboGhola\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.5\\microsoft.aspnetcore.openapi.9.0.5.nupkg.sha512",
     "C:\\Users\\Tojan AboGhola\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\7.0.0\\microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
     "C:\\Users\\Tojan AboGhola\\.nuget\\packages\\microsoft.build.framework\\17.8.3\\microsoft.build.framework.17.8.3.nupkg.sha512",
@@ -36,6 +39,8 @@
     "C:\\Users\\Tojan AboGhola\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\9.0.10\\microsoft.extensions.dependencyinjection.9.0.10.nupkg.sha512",
     "C:\\Users\\Tojan AboGhola\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.10\\microsoft.extensions.dependencyinjection.abstractions.9.0.10.nupkg.sha512",
     "C:\\Users\\Tojan AboGhola\\.nuget\\packages\\microsoft.extensions.dependencymodel\\9.0.10\\microsoft.extensions.dependencymodel.9.0.10.nupkg.sha512",
+    "C:\\Users\\Tojan AboGhola\\.nuget\\packages\\microsoft.extensions.identity.core\\9.0.10\\microsoft.extensions.identity.core.9.0.10.nupkg.sha512",
+    "C:\\Users\\Tojan AboGhola\\.nuget\\packages\\microsoft.extensions.identity.stores\\9.0.10\\microsoft.extensions.identity.stores.9.0.10.nupkg.sha512",
     "C:\\Users\\Tojan AboGhola\\.nuget\\packages\\microsoft.extensions.localization\\9.0.10\\microsoft.extensions.localization.9.0.10.nupkg.sha512",
     "C:\\Users\\Tojan AboGhola\\.nuget\\packages\\microsoft.extensions.localization.abstractions\\9.0.10\\microsoft.extensions.localization.abstractions.9.0.10.nupkg.sha512",
     "C:\\Users\\Tojan AboGhola\\.nuget\\packages\\microsoft.extensions.logging\\9.0.10\\microsoft.extensions.logging.9.0.10.nupkg.sha512",

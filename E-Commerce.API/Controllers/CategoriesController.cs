@@ -9,7 +9,6 @@ using Microsoft.Extensions.Localization;
 using System.Globalization;
 using System.Threading.Tasks;
 using System.IO;
-using E_Commerce.Model.Category;
 using Microsoft.EntityFrameworkCore;
 using E_Commerce.BLL.Repository;
 namespace E_Commerce.Controllers

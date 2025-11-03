@@ -1,6 +1,8 @@
 using E_Commerce.BLL.Repository;
+using E_Commerce.BLL.Service.Classes;
 using E_Commerce.DAL.Repository;
 using E_Commerce.DAL.Repository.Classes;
+using E_Commerce.DAL.Utils;
 using E_Commerce.Data;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +14,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<CategoryRepository>();
 builder.Services.AddScoped<BrandRepository>();
+builder.Services.AddScoped<BrandService>();
+
+builder.Services.AddScoped<ISeedData,SeedData>();
 
 
 
@@ -45,6 +50,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+var scope = app.Services.CreateScope();
+var objectOfSeedData = scope.ServiceProvider.GetRequiredService<ISeedData>();
+objectOfSeedData.DataSeeding();
 
 app.UseHttpsRedirection();
 

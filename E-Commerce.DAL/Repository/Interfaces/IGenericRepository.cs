@@ -1,5 +1,5 @@
 ﻿using E_Commerce.Model;
-using E_Commerce.Model.Category;
+using E_Commerce.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;

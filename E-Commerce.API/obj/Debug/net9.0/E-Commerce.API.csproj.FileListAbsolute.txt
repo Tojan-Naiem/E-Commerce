@@ -176,3 +176,8 @@ C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\obj\Debug\net9.0\E-Commerce.API.pdb
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\obj\Debug\net9.0\E-Commerce.API.genruntimeconfig.cache
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\obj\Debug\net9.0\ref\E-Commerce.API.dll
+C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\Microsoft.Extensions.Identity.Stores.dll

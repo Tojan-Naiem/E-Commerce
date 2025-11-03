@@ -1,7 +1,7 @@
 ﻿using E_Commerce.DAL.Repository.Interfaces;
 using E_Commerce.Data;
 using E_Commerce.Model;
-using E_Commerce.Model.Category;
+using E_Commerce.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
