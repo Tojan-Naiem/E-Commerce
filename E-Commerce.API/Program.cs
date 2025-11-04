@@ -1,13 +1,17 @@
 using E_Commerce.BLL.Repository;
 using E_Commerce.BLL.Service.Classes;
+using E_Commerce.DAL.Model;
 using E_Commerce.DAL.Repository;
 using E_Commerce.DAL.Repository.Classes;
 using E_Commerce.DAL.Utils;
 using E_Commerce.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System.Globalization;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +21,8 @@ builder.Services.AddScoped<BrandRepository>();
 builder.Services.AddScoped<BrandService>();
 
 builder.Services.AddScoped<ISeedData,SeedData>();
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 
 
@@ -52,7 +58,8 @@ if (app.Environment.IsDevelopment())
 }
 var scope = app.Services.CreateScope();
 var objectOfSeedData = scope.ServiceProvider.GetRequiredService<ISeedData>();
-objectOfSeedData.DataSeeding();
+await objectOfSeedData.DataSeedingAsync();
+await objectOfSeedData.IdentityDataSeedingAsync();
 
 app.UseHttpsRedirection();
 

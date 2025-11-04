@@ -8,6 +8,7 @@ namespace E_Commerce.DAL.Utils
 {
     public  interface ISeedData
     {
-        public void DataSeeding();
+        public Task DataSeedingAsync();
+        public Task IdentityDataSeedingAsync();
     }
 }
