@@ -19,71 +19,13 @@ using System.Threading.Tasks;
 namespace E_Commerce.BLL.Service.Classes
 {
 
-    public class BrandService:IBrandService
+    public class BrandService:GenericService<BrandRequestDTO,BrandResponseDTO,Brand> ,IBrandService
     {
-        private readonly BrandRepository _brandRepository;
         public BrandService(
-BrandRepository brandRepository      )
+IBrandRepository brandRepository      ):base(brandRepository)
         {
-            _brandRepository = brandRepository;
         }
 
-        public async Task<List<BrandResponseDTO>> GetAll(string lang = "en")
-        {
-            var brands = await _brandRepository.GetAll(lang);
-            var brandResponseDTOs = brands.Select(c => new BrandResponseDTO
-            {
-                Id = c.Id,
-                Name = c.Name,
-
-            }).ToList();
-            return brandResponseDTOs;
-
-        }
-        public BrandResponseDTO GetById(long id)
-        {
-            var brand = _brandRepository.GetById(id);
-            if (brand is null) return null;
-            return brand.Adapt<BrandResponseDTO>();
-        }
-        public async Task Create(BrandRequestDTO brandRequest)
-        {
-
-            Brand brand = new Brand()
-            {
-                Status = brandRequest.Status,
-                Name = brandRequest.Name,
-
-            };
-            await _brandRepository.Save(brand);
-        }
-        public async Task<bool> Update(long id, BrandRequestDTO brandRequestDTO)
-        {
-            var brand = _brandRepository.GetById(id);
-            if (brand is null) return false;
-            brand.Status = brandRequestDTO.Status;
-            brand.Name = brandRequestDTO.Name;
-
-
-            await _brandRepository.SaveChangesInDatabase();
-
-            return true;
-        }
-
-        public async Task<bool> ToggleStatus(long id)
-        {
-            var brand = _brandRepository.GetById(id);
-            if (brand is null) return false;
-            brand.Status = (brand.Status == Status.Active) ? Status.In_active : Status.Active;
-            await _brandRepository.SaveChangesInDatabase();
-            return true;
-        }
-        public async Task<bool> Delete(long id)
-        {
-            var brand = _brandRepository.GetById(id);
-            if (brand is null) return false;
-           await _brandRepository.Remove(brand);
-            return true;
-        }
+      
     }
 }

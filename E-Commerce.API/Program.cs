@@ -3,6 +3,7 @@ using E_Commerce.BLL.Service.Classes;
 using E_Commerce.DAL.Model;
 using E_Commerce.DAL.Repository;
 using E_Commerce.DAL.Repository.Classes;
+using E_Commerce.DAL.Repository.Interfaces;
 using E_Commerce.DAL.Utils;
 using E_Commerce.Data;
 using Microsoft.AspNetCore.Identity;
@@ -19,6 +20,8 @@ builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<CategoryRepository>();
 builder.Services.AddScoped<BrandRepository>();
 builder.Services.AddScoped<BrandService>();
+builder.Services.AddScoped<IBrandRepository>();
+builder.Services.AddScoped<ICategoryRepository>();
 
 builder.Services.AddScoped<ISeedData,SeedData>();
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()

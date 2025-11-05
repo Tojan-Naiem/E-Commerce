@@ -1,4 +1,6 @@
-﻿using E_Commerce.DTO.Request;
+﻿using E_Commerce.BLL.Service.Interfaces;
+using E_Commerce.DAL.Model;
+using E_Commerce.DTO.Request;
 using E_Commerce.DTO.Response;
 using System;
 using System.Collections.Generic;
@@ -8,14 +10,9 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.BLL.Service
 {
-    public interface ICategoryService
+    public interface ICategoryService:IGenericService<CategoryRequestDTO,CategoryResponseDTO,Category>
     {
-        public  Task<List<CategoryResponseDTO>> GetAll(string lang = "en");
-        public CategoryResponseDTO GetCategory(long id);
-        public Task Create(CategoryRequestDTO categoryDTO);
-        public Task<bool> Update(long id, CategoryRequestDTO categoryRequestDTO);
-        public  Task<bool> ToggleStatus(long id);
-        public  Task<bool> Delete(long id);
+    
 
 
 
