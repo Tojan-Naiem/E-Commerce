@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.DAL.DTO.Request
 {
-    internal class LoginRequest
+    public class LoginRequest
     {
+        public string Email { get; set; }
+        public string Password { get; set; }
     }
 }

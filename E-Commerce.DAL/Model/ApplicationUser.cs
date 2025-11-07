@@ -10,8 +10,8 @@ namespace E_Commerce.DAL.Model
     // Add this class in the situation we need to add a new things to the applicationUser that's not in the IdentityUser
     public class ApplicationUser:IdentityUser
     {
-        public string FullName;
-        public string city;
-        public string street;
+        public string FullName { get; set; }
+        public string? city { get; set; }
+        public string? street { get; set; }
     }
 }

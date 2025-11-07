@@ -1,16 +1,21 @@
 using E_Commerce.BLL.Repository;
 using E_Commerce.BLL.Service.Classes;
+using E_Commerce.BLL.Service.Interfaces;
 using E_Commerce.DAL.Model;
 using E_Commerce.DAL.Repository;
 using E_Commerce.DAL.Repository.Classes;
 using E_Commerce.DAL.Repository.Interfaces;
 using E_Commerce.DAL.Utils;
 using E_Commerce.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using System.Globalization;
+using System.Text;
 
 
 
@@ -20,8 +25,9 @@ builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<CategoryRepository>();
 builder.Services.AddScoped<BrandRepository>();
 builder.Services.AddScoped<BrandService>();
-builder.Services.AddScoped<IBrandRepository>();
-builder.Services.AddScoped<ICategoryRepository>();
+builder.Services.AddScoped<IBrandRepository, BrandRepository>();
+builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
+builder.Services.AddScoped<IAuthService, AuthenticationService>();
 
 builder.Services.AddScoped<ISeedData,SeedData>();
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -48,6 +54,31 @@ builder.Services.AddDbContext<ApplicationDbContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")
   
     ));
+builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                      .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                      .AddEnvironmentVariables();
+
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+
+        .AddJwtBearer(options =>
+        {
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(
+    Encoding.UTF8.GetBytes(builder.Configuration.GetSection("jwtOptions")["SecretKey"])
+)
+
+            };
+        });
 var app = builder.Build();
 app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 

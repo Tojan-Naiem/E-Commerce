@@ -11,10 +11,12 @@ using System.Threading.Tasks;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
 using E_Commerce.BLL.Repository;
+using Microsoft.AspNetCore.Authorization;
 namespace E_Commerce.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles ="Admin")]
     public class CategoriesController : ControllerBase
     {
         private readonly CategoryService _categoryService;
@@ -28,6 +30,7 @@ namespace E_Commerce.Controllers
 
         }
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<List<CategoryResponseDTO>>> GetAll([FromQuery]string lang="en")
         {
             var categoryDTOs = _categoryService.GetAll(lang);
@@ -35,9 +38,11 @@ namespace E_Commerce.Controllers
 
         }
         [HttpGet("{id}")]
+        [AllowAnonymous]
+
         public IActionResult GetCategory([FromRoute] long id)
         {
-            CategoryResponseDTO categoryResponseDTO= _categoryService.GetCategory(id);
+            CategoryResponseDTO categoryResponseDTO= _categoryService.GetById(id);
             if (categoryResponseDTO is null) return NotFound();
             return Ok(categoryResponseDTO);
         }

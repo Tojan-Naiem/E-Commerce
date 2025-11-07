@@ -1,0 +1,108 @@
+﻿using E_Commerce.BLL.Service.Interfaces;
+using E_Commerce.DAL.DTO.Request;
+using E_Commerce.DAL.DTO.Response;
+using E_Commerce.DAL.Model;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace E_Commerce.BLL.Service.Classes
+{
+    public class AuthenticationService : IAuthService
+    {
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IConfiguration _configuration;
+        public AuthenticationService(
+             UserManager<ApplicationUser> userManager,
+             IConfiguration configuration
+            )
+        {
+            _configuration = configuration;
+            _userManager = userManager;
+        }
+        public async Task<UserResponse> LoginAsync(LoginRequest request)
+        {
+            var user = await _userManager.FindByEmailAsync(request.Email);
+            if(user is null)
+            {
+                return new UserResponse()
+                {
+                    Token = "Not found"
+                };
+            }
+            var isCorrect = await _userManager.CheckPasswordAsync(user, request.Password);
+            if(!isCorrect)
+            {
+                throw new Exception("Invalid Password");
+            }
+            return new UserResponse()
+            {
+                // create token
+                Token = await CreateTokenAsync(user)
+            };
+        }
+
+        public async Task<UserResponse> RegisterAsync(RegisterRequest request)
+        {
+            var user = new ApplicationUser()
+            {
+                FullName = request.FullName,
+                UserName = request.UserName,
+                Email = request.Email,
+                PhoneNumber = request.PhoneNumber
+            };
+           var result= await _userManager.CreateAsync(user, request.Password);
+
+            if (result.Succeeded)
+            {
+                return new UserResponse()
+                {
+                    Token = request.Email
+                };
+            }
+            var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+
+            throw new Exception(errors);
+        }
+        private async Task<string> CreateTokenAsync(ApplicationUser user)
+        {
+            Console.WriteLine("full name :  "+user.FullName);
+            Console.WriteLine(user.Email);
+            Console.WriteLine(user.Id);
+
+            var Claims = new List<Claim>()
+            {
+                new Claim(ClaimTypes.Name,user.FullName),
+                new Claim(ClaimTypes.Email,user.Email),
+                new Claim(ClaimTypes.NameIdentifier,user.Id)
+            };
+            var Roles = await _userManager.GetRolesAsync(user);
+            foreach(var role in Roles)
+            {
+
+                Claims.Add(new Claim(ClaimTypes.Role, role));
+
+
+            }
+            var securityKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(_configuration.GetSection("jwtOptions")["SecretKey"])
+            );
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            var token = new JwtSecurityToken(
+                claims: Claims,
+                expires:DateTime.Now.AddDays(15),
+                signingCredentials:credentials
+                );
+            // convert token from object to string 
+            return new JwtSecurityTokenHandler().WriteToken(token);
+
+        }
+    }
+}

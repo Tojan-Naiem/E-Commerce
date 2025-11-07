@@ -4,12 +4,14 @@ using E_Commerce.DAL.DTO.Request;
 using E_Commerce.DAL.DTO.Response;
 using E_Commerce.DTO.Request;
 using E_Commerce.DTO.Response;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Commerce.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class BrandsController : Controller
     {
         private readonly BrandService _brandService;
@@ -23,6 +25,7 @@ namespace E_Commerce.Controllers
 
         }
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<List<CategoryResponseDTO>>> GetAll([FromQuery] string lang = "en")
         {
             var categoryDTOs = _brandService.GetAll(lang);
@@ -30,6 +33,8 @@ namespace E_Commerce.Controllers
 
         }
         [HttpGet("{id}")]
+        [AllowAnonymous]
+
         public IActionResult Get([FromRoute] long id)
         {
             BrandResponseDTO brandResponseDTO = _brandService.GetById(id);
