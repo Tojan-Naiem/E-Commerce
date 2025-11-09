@@ -182,3 +182,6 @@ C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\Microsoft.Extensions.Identity.Core.dll
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.UI.dll
+C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\Microsoft.Extensions.FileProviders.Embedded.dll

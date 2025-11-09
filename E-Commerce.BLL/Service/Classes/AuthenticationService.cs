@@ -3,6 +3,7 @@ using E_Commerce.DAL.DTO.Request;
 using E_Commerce.DAL.DTO.Response;
 using E_Commerce.DAL.Model;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -19,17 +20,24 @@ namespace E_Commerce.BLL.Service.Classes
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IConfiguration _configuration;
+        private readonly IEmailSender _emailSender;
         public AuthenticationService(
              UserManager<ApplicationUser> userManager,
-             IConfiguration configuration
+             IConfiguration configuration,
+             IEmailSender emailSender
             )
         {
             _configuration = configuration;
             _userManager = userManager;
+            _emailSender = emailSender;
         }
         public async Task<UserResponse> LoginAsync(LoginRequest request)
         {
             var user = await _userManager.FindByEmailAsync(request.Email);
+            if (!await _userManager.IsEmailConfirmedAsync(user))
+            {
+                throw new Exception("Not confirmed email");
+            }
             if(user is null)
             {
                 return new UserResponse()
@@ -42,6 +50,7 @@ namespace E_Commerce.BLL.Service.Classes
             {
                 throw new Exception("Invalid Password");
             }
+
             return new UserResponse()
             {
                 // create token
@@ -62,6 +71,7 @@ namespace E_Commerce.BLL.Service.Classes
 
             if (result.Succeeded)
             {
+                await _emailSender.SendEmailAsync(user.Email, "Welcome", "<h1>test</h1>");
                 return new UserResponse()
                 {
                     Token = request.Email
