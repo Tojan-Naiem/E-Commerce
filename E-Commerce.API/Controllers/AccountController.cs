@@ -18,15 +18,21 @@ namespace E_Commerce.Controllers
             _authenticationService = authenticationService;
         }
         [HttpPost("register")]
-        public async Task<ActionResult<UserResponse>> register(RegisterRequest request)
+        public async Task<ActionResult<UserResponse>> Register(RegisterRequest request)
         {
             var result =await _authenticationService.RegisterAsync(request);
             return Ok(result);
         }
         [HttpPost("login")]
-        public async Task<ActionResult<UserResponse>> login(LoginRequest request)
+        public async Task<ActionResult<UserResponse>> Login(LoginRequest request)
         {
             var result = await _authenticationService.LoginAsync(request);
+            return Ok(result);
+        }
+        [HttpPost("confirmEmail")]
+        public async Task<ActionResult<UserResponse>> ConfirmEmail(string token,string id )
+        {
+            var result = await _authenticationService.ConfirmEmail(token,id);
             return Ok(result);
         }
     }

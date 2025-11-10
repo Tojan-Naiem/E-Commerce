@@ -12,6 +12,8 @@ namespace E_Commerce.BLL.Service.Interfaces
     {
         public Task<UserResponse> LoginAsync(LoginRequest request);
         public Task<UserResponse> RegisterAsync(RegisterRequest request);
+        public Task<string> ConfirmEmail(string token, string userId);
+
 
     }
 }

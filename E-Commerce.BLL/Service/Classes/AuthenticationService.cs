@@ -57,6 +57,20 @@ namespace E_Commerce.BLL.Service.Classes
                 Token = await CreateTokenAsync(user)
             };
         }
+        public async Task<string>ConfirmEmail(string token,string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if(user is not null)
+            {
+
+            }
+            var result = await _userManager.ConfirmEmailAsync(user, token);
+            if (result.Succeeded)
+            {
+                return "Email is confirmed successfully";
+            }
+            return "Email confirmaion failed";
+        }
 
         public async Task<UserResponse> RegisterAsync(RegisterRequest request)
         {
@@ -71,7 +85,11 @@ namespace E_Commerce.BLL.Service.Classes
 
             if (result.Succeeded)
             {
-                await _emailSender.SendEmailAsync(user.Email, "Welcome", "<h1>test</h1>");
+                var token =await  _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var escapeToken = Uri.EscapeDataString(token); 
+                var emailUrl = $"https://localhost:7039/api/Account/ConfirmedEmail?token={escapeToken}&userId={user.Id}";
+                await _emailSender.SendEmailAsync(user.Email, $"Welcome to the new user for my lovely ecommerce >3", $"Welcome , we are totaly happy that u register to our ecommerce ," +
+                    $" we are too lucky cuz we have a new member ! lolololololoishhhhhhhhhhhhhhhhhhhhhhhhhhhhh <a href={token}></a> ");
                 return new UserResponse()
                 {
                     Token = request.Email
