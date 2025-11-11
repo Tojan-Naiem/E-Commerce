@@ -22,7 +22,7 @@ namespace E_Commerce.Controllers
               IProductService productService
               )
             {
-                _productService =  productService
+            _productService = productService;
 
 
         }
@@ -44,7 +44,7 @@ namespace E_Commerce.Controllers
                 return Ok(productResponse);
             }
             [HttpPost]
-            public async Task<IActionResult> Create([FromBody] ProductRequest productRequest)
+            public async Task<IActionResult> Create([FromForm] ProductRequest productRequest)
             {
                 await _productService.Create(productRequest);
                 return StatusCode(StatusCodes.Status201Created);
