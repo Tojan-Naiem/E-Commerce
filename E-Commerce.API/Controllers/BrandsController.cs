@@ -1,5 +1,6 @@
 ﻿using E_Commerce.BLL.Repository;
 using E_Commerce.BLL.Service.Classes;
+using E_Commerce.BLL.Service.Interfaces;
 using E_Commerce.DAL.DTO.Request;
 using E_Commerce.DAL.DTO.Response;
 using E_Commerce.DTO.Request;
@@ -14,10 +15,10 @@ namespace E_Commerce.Controllers
     [Authorize(Roles = "Admin")]
     public class BrandsController : Controller
     {
-        private readonly BrandService _brandService;
+        private readonly IBrandService _brandService;
 
         public BrandsController(
-          BrandService brandService
+          IBrandService brandService
           )
         {
             _brandService = brandService;
@@ -26,10 +27,10 @@ namespace E_Commerce.Controllers
         }
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult<List<CategoryResponseDTO>>> GetAll([FromQuery] string lang = "en")
+        public async Task<ActionResult<List<BrandResponseDTO>>> GetAll([FromQuery] string lang = "en")
         {
-            var categoryDTOs = _brandService.GetAll(lang);
-            return Ok(new { categoryDTOs });
+            var brandResponseDTOs = _brandService.GetAll(lang);
+            return Ok(new { brandResponseDTOs });
 
         }
         [HttpGet("{id}")]
