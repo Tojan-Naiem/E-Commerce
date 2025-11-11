@@ -18,22 +18,38 @@ namespace E_Commerce.Controllers
             _authenticationService = authenticationService;
         }
         [HttpPost("register")]
-        public async Task<ActionResult<UserResponse>> Register(RegisterRequest request)
+        public async Task<ActionResult<UserResponse>> Register([FromBody] RegisterRequest request)
         {
             var result =await _authenticationService.RegisterAsync(request);
             return Ok(result);
         }
         [HttpPost("login")]
-        public async Task<ActionResult<UserResponse>> Login(LoginRequest request)
+        public async Task<ActionResult<UserResponse>> Login([FromBody] LoginRequest request)
         {
             var result = await _authenticationService.LoginAsync(request);
             return Ok(result);
         }
-        [HttpPost("confirmEmail")]
-        public async Task<ActionResult<UserResponse>> ConfirmEmail(string token,string id )
+        [HttpGet("ConfirmedEmail")]
+        public async Task<ActionResult<string>> ConfirmEmail([FromQuery]string token, [FromQuery]string userId)
         {
-            var result = await _authenticationService.ConfirmEmail(token,id);
+            var result = await _authenticationService.ConfirmEmail(token, userId);
             return Ok(result);
         }
+        [HttpPost("ForgotPassword")]
+        public async Task<ActionResult<string>> ForgotPassword([FromBody] ForgotPasswordRequest request)
+        {
+            var result = await _authenticationService.ForgotPassword(request);
+            return Ok(result);
+
+        }
+        [HttpPatch("ResetPassword")]
+        public async Task<ActionResult<string>> ResetPassword([FromBody] ResetPasswordRequestDTO request)
+        {
+            var result = await _authenticationService.ResetPassword (request);
+            return Ok(result);
+
+        }
+
+
     }
 }

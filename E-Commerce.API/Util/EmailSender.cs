@@ -26,7 +26,8 @@ namespace E_Commerce.Util
                                 to: email,
                                 subject,
                                 htmlMessage
-                                ));
+                                )
+                { IsBodyHtml=true});
         }
     }
     

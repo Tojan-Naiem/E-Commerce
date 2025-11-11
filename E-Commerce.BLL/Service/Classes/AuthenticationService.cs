@@ -30,6 +30,46 @@ namespace E_Commerce.BLL.Service.Classes
             _configuration = configuration;
             _userManager = userManager;
             _emailSender = emailSender;
+           
+        }
+        public async Task<bool>ForgotPassword(ForgotPasswordRequest request)
+        {
+            var user = await _userManager.FindByEmailAsync(request.Email);
+            if(user is null)
+            {
+                throw new Exception("User not found");
+            }
+            var random = new Random();
+            var code = random.Next(1000, 9000).ToString();
+            user.CodeResetPassword = code;
+            user.PasswordResetCodeExpiry = DateTime.Now.AddMinutes(15);
+            await _userManager.UpdateAsync(user);
+            await _emailSender.SendEmailAsync(
+                request.Email,
+                "Reset ur Password !!",
+                $"<h1>Reset ur password and don't forgot it ! , the code is {code}</h1>"
+                );
+            return true;
+
+        }
+        public async Task<bool>ResetPassword(ResetPasswordRequestDTO request)
+        {
+            var user = await _userManager.FindByEmailAsync(request.Email);
+            if (user is null) throw new Exception("User not found");
+            if (user.CodeResetPassword != request.Code) throw new Exception("Code is not equal!");
+            if (user.PasswordResetCodeExpiry < DateTime.Now) throw new Exception("Code expiry end!");
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var result = await _userManager.ResetPasswordAsync(user, token, request.NewPassword);
+
+            if (result.Succeeded)
+            {
+                await _emailSender.SendEmailAsync(
+                   request.Email,
+                   "Successfully change ur password!",
+                   "Done saving ur new password ! in the next time save it plz"
+                    );
+            }
+            return true;
         }
         public async Task<UserResponse> LoginAsync(LoginRequest request)
         {
@@ -44,6 +84,10 @@ namespace E_Commerce.BLL.Service.Classes
                 {
                     Token = "Not found"
                 };
+            }
+            if(!await _userManager.IsEmailConfirmedAsync(user))
+            {
+                throw new Exception("Plz confirm ur email ! ");
             }
             var isCorrect = await _userManager.CheckPasswordAsync(user, request.Password);
             if(!isCorrect)
@@ -60,20 +104,25 @@ namespace E_Commerce.BLL.Service.Classes
         public async Task<string>ConfirmEmail(string token,string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
-            if(user is not null)
+            if(user is  null)
             {
-
+                throw new Exception("User not found");
             }
             var result = await _userManager.ConfirmEmailAsync(user, token);
             if (result.Succeeded)
             {
                 return "Email is confirmed successfully";
             }
-            return "Email confirmaion failed";
+            return "Email confirmation failed";
         }
 
         public async Task<UserResponse> RegisterAsync(RegisterRequest request)
         {
+            var existUser = await _userManager.FindByEmailAsync(request.Email);
+            if(existUser is not null)
+            {
+                throw new Exception("The user already in");
+            }
             var user = new ApplicationUser()
             {
                 FullName = request.FullName,
@@ -89,7 +138,7 @@ namespace E_Commerce.BLL.Service.Classes
                 var escapeToken = Uri.EscapeDataString(token); 
                 var emailUrl = $"https://localhost:7039/api/Account/ConfirmedEmail?token={escapeToken}&userId={user.Id}";
                 await _emailSender.SendEmailAsync(user.Email, $"Welcome to the new user for my lovely ecommerce >3", $"Welcome , we are totaly happy that u register to our ecommerce ," +
-                    $" we are too lucky cuz we have a new member ! lolololololoishhhhhhhhhhhhhhhhhhhhhhhhhhhhh <a href={token}></a> ");
+                    $" we are too lucky cuz we have a new member ! lolololololoishhhhhhhhhhhhhhhhhhhhhhhhhhhhh <a href='{emailUrl}'>confirm email</a> ");
                 return new UserResponse()
                 {
                     Token = request.Email
