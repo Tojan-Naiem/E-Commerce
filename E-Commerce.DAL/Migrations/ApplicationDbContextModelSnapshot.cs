@@ -156,16 +156,10 @@ namespace E_Commerce.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<int?>("BrandId")
-                        .HasColumnType("int");
-
-                    b.Property<long>("BrandId1")
+                    b.Property<long?>("BrandId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<long>("CategoryId1")
+                    b.Property<long>("CategoryId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedAt")
@@ -197,9 +191,9 @@ namespace E_Commerce.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BrandId1");
+                    b.HasIndex("BrandId");
 
-                    b.HasIndex("CategoryId1");
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
                 });
@@ -341,13 +335,11 @@ namespace E_Commerce.DAL.Migrations
                 {
                     b.HasOne("E_Commerce.DAL.Model.Brand", "Brand")
                         .WithMany()
-                        .HasForeignKey("BrandId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BrandId");
 
                     b.HasOne("E_Commerce.DAL.Model.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("CategoryId1")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

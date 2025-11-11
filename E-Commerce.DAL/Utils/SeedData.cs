@@ -69,16 +69,25 @@ namespace E_Commerce.DAL.Utils
                 {
                     Email = "tojan050@gmail.com",
                     FullName = "Tojan Abu Gholah",
-                    UserName = "tojan"
+                    UserName = "tojan",
+                    EmailConfirmed = true
+
                 };
                 var user2 = new ApplicationUser()
                 {
                     Email = "arwa050@gmail.com",
                     FullName = "Arwa Abu Gholah",
-                    UserName = "arwa"
+                    UserName = "arwa",
+                    EmailConfirmed = true
+
                 };
                 await _userManager.CreateAsync(user1);
                 await _userManager.CreateAsync(user2);
+     
+                await _userManager.AddPasswordAsync(user1, "123soso@S");
+                await _userManager.AddPasswordAsync(user2, "123soso@S");
+
+              
 
                 await _userManager.AddToRoleAsync(user1, "Admin");
                 await _userManager.AddToRoleAsync(user1, "SuperAdmin");

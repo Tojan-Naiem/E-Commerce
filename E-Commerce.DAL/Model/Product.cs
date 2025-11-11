@@ -14,9 +14,9 @@ namespace E_Commerce.Model
         public string? MainImage { get; set; }
 
         public double? Rate { get; set; }
-        public int CategoryId { get; set; }
+        public long CategoryId { get; set; }
         public Category Category { get; set; }
-        public int? BrandId { get; set; }
-        public Brand Brand { get; set; }
+        public long? BrandId { get; set; }
+        public Brand? Brand { get; set; }
     }
 }
