@@ -1,4 +1,6 @@
-﻿using System;
+﻿using E_Commerce.DAL.Model;
+using E_Commerce.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.DAL.Repository.Interfaces
 {
-    internal class IProductRepository
+    public interface IProductRepository : IGenericRepository<Product>
     {
     }
 }
