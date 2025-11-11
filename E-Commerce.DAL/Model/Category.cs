@@ -6,6 +6,7 @@ namespace E_Commerce.DAL.Model
     public class Category:BaseModel
     {
         public string? Name { get; set; }
+        public List<Product> Products = new List<Product>();
 
     }
 }

@@ -10,5 +10,7 @@ namespace E_Commerce.DAL.Model
     public class Brand:BaseModel
     {
         public string Name { get; set; }
+        public List<Product> Products = new List<Product>();
+
     }
 }
