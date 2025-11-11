@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "r5o1C4wATps=",
+  "dgSpecHash": "LhFJEocb5QQ=",
   "success": true,
   "projectFilePath": "C:\\Users\\Tojan AboGhola\\Desktop\\asp .net course\\course\\E-Commerce\\E-Commerce.API\\E-Commerce.API.csproj",
   "expectedPackageFiles": [
@@ -12,6 +12,7 @@
     "C:\\Users\\Tojan AboGhola\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\9.0.10\\microsoft.aspnetcore.authentication.jwtbearer.9.0.10.nupkg.sha512",
     "C:\\Users\\Tojan AboGhola\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\9.0.10\\microsoft.aspnetcore.cryptography.internal.9.0.10.nupkg.sha512",
     "C:\\Users\\Tojan AboGhola\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\9.0.10\\microsoft.aspnetcore.cryptography.keyderivation.9.0.10.nupkg.sha512",
+    "C:\\Users\\Tojan AboGhola\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
     "C:\\Users\\Tojan AboGhola\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\9.0.10\\microsoft.aspnetcore.identity.entityframeworkcore.9.0.10.nupkg.sha512",
     "C:\\Users\\Tojan AboGhola\\.nuget\\packages\\microsoft.aspnetcore.identity.ui\\9.0.10\\microsoft.aspnetcore.identity.ui.9.0.10.nupkg.sha512",
     "C:\\Users\\Tojan AboGhola\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.5\\microsoft.aspnetcore.openapi.9.0.5.nupkg.sha512",
