@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Globalization;
@@ -105,6 +106,18 @@ await objectOfSeedData.IdentityDataSeedingAsync();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+// static files => files don't change in runtime like images etc...
+// this line is to access the files 
+app.UseStaticFiles();// here it's by default go to wwwroot , so we need to put the images folder inseid the wwwroot ( we also can change the name of the folder)
+//*******if we wanna change the wwwroot into another name => 
+
+//app.UseStaticFiles(new StaticFileOptions
+//{
+//    FileProvider = new PhysicalFileProvider(
+//        Path.Combine(Directory.GetCurrentDirectory(), "Uploads")),
+//    RequestPath = "/files"
+//});
+
 
 app.MapControllers();
 
