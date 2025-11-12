@@ -45,9 +45,9 @@ namespace E_Commerce.Controllers
             }
             [HttpPost]
             public async Task<IActionResult> Create([FromForm] ProductRequest productRequest)
-            {
-                await _productService.Create(productRequest);
-                return StatusCode(StatusCodes.Status201Created);
+        {
+            await _productService.CreateFile(productRequest);
+            return StatusCode(StatusCodes.Status201Created);
             }
             [HttpPatch("{id}")]
             public async Task<IActionResult> Update([FromRoute] long id, [FromBody] ProductRequest productRequest)
