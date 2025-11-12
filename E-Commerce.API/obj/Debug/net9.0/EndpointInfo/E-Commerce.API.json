@@ -988,10 +988,6 @@
             "type": "string",
             "nullable": true
           },
-          "mainImage": {
-            "type": "string",
-            "nullable": true
-          },
           "mainImageUrl": {
             "type": "string",
             "nullable": true,

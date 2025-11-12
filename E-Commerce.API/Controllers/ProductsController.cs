@@ -66,7 +66,7 @@ namespace E_Commerce.Controllers
             [HttpDelete("{id}")]
             public async Task<IActionResult> Delete([FromRoute] long id)
             {
-                bool isExist = await _productService.Delete(id);
+                bool isExist = await _productService.DeleteFile(id);
                 if (isExist is false) return NotFound(new { message = "Not found" });
                 return Ok(new { message = "Deleted" });
             }

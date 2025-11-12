@@ -3,6 +3,7 @@ using E_Commerce.DAL.DTO.Request;
 using E_Commerce.DAL.DTO.Response;
 using E_Commerce.DAL.Model;
 using E_Commerce.DAL.Repository;
+using E_Commerce.DAL.Repository.Classes;
 using E_Commerce.DAL.Repository.Interfaces;
 using E_Commerce.DTO.Request;
 using E_Commerce.DTO.Response;
@@ -39,6 +40,15 @@ namespace E_Commerce.BLL.Service.Classes
             }
             await _productRepository.Save(entity);
             return entity.Id;
+        }
+        public async Task<bool> DeleteFile(long id)
+        {
+            var entity = _productRepository.GetById(id);
+            bool successDelete = await _fileService.DeleteAsync(entity.MainImage);
+            if (successDelete is false)
+                throw new Exception("Error");
+            await _productRepository.Remove(entity);
+            return true;
         }
     }
 }

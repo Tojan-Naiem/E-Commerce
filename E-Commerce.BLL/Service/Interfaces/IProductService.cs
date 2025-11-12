@@ -12,5 +12,6 @@ namespace E_Commerce.BLL.Service.Interfaces
     public interface IProductService:IGenericService<ProductRequest,ProductResponse,Product>
     {
         public Task<long> CreateFile(ProductRequest request);
+        public Task<bool> DeleteFile(long id);
     }
 }
