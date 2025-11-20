@@ -37,7 +37,6 @@ namespace E_Commerce.BLL.Service.Classes
                 fileInfo.IsReadOnly = false;
                 Console.WriteLine("File was read-only, fixed it.");
             }
-
             try
             {
             File.Delete(filePath);

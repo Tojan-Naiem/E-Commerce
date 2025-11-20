@@ -28,7 +28,6 @@ namespace E_Commerce.BLL.Service.Classes
             _productRepository = productRepository;
             _fileService = fileService;
         }
-
         public async Task<long> CreateFile(ProductRequest request)
         {
             var entity = request.Adapt<Product>();
