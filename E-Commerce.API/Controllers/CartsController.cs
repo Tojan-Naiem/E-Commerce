@@ -20,7 +20,7 @@ namespace E_Commerce.Controllers
         {
             var UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var result=await _cartService.addToCart(cartRequest, UserId);
-            return Ok(result);
+            return result?Ok("Done"):BadRequest();
         }
     }
 }
