@@ -1,14 +1,15 @@
 ﻿using E_Commerce.DAL.DTO.Request;
+using E_Commerce.DAL.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_Commerce.BLL.Service.Interfaces
+namespace E_Commerce.DAL.Repository.Interfaces
 {
-    public interface ICartService
+    public interface  ICartRepository
     {
-        public Task<bool> addToCart(CartRequest Cart, string UserId);
+        public Task<bool> Add(Cart Cart);
     }
 }

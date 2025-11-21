@@ -36,6 +36,8 @@ builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IBrandService, BrandService>();
+builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<ICartService, CartService>();
 
 builder.Services.AddScoped<ISeedData,SeedData>();
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()

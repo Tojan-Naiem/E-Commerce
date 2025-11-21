@@ -13,7 +13,7 @@ namespace E_Commerce.DAL.Model
     {
         public long ProductId { get; set; }
         public Product Product { get; set; }
-        public long UserId { get; set; }
+        public string UserId { get; set; }
         public ApplicationUser User { get; set; }
         public int Count { get; set; }
     }
