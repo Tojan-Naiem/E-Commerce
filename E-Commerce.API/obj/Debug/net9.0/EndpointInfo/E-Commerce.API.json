@@ -455,6 +455,16 @@
             "description": "OK"
           }
         }
+      },
+      "get": {
+        "tags": [
+          "Carts"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/api/Categories": {

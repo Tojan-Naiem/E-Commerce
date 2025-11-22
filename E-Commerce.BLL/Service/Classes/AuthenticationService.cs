@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Runtime.Intrinsics.X86;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -74,26 +75,28 @@ namespace E_Commerce.BLL.Service.Classes
         public async Task<UserResponse> LoginAsync(LoginRequest request)
         {
             var user = await _userManager.FindByEmailAsync(request.Email);
-            if (!await _userManager.IsEmailConfirmedAsync(user))
-            {
-                throw new Exception("Not confirmed email");
-            }
-            if(user is null)
+            if (user is null)
             {
                 return new UserResponse()
                 {
                     Token = "Not found"
                 };
             }
-            if(!await _userManager.IsEmailConfirmedAsync(user))
+            if (!await _userManager.IsEmailConfirmedAsync(user))
+            {
+                throw new Exception("Not confirmed email");
+            }
+
+            if (!await _userManager.IsEmailConfirmedAsync(user))
             {
                 throw new Exception("Plz confirm ur email ! ");
             }
             var isCorrect = await _userManager.CheckPasswordAsync(user, request.Password);
-            if(!isCorrect)
+            if (!isCorrect)
             {
                 throw new Exception("Invalid Password");
             }
+        
 
             return new UserResponse()
             {
@@ -130,7 +133,9 @@ namespace E_Commerce.BLL.Service.Classes
                 Email = request.Email,
                 PhoneNumber = request.PhoneNumber
             };
-           var result= await _userManager.CreateAsync(user, request.Password);
+            await _userManager.AddToRoleAsync(user, "Customer");
+
+            var result = await _userManager.CreateAsync(user, request.Password);
 
             if (result.Succeeded)
             {
