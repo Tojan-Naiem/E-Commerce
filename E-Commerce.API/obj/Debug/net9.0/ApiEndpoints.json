@@ -246,6 +246,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "E_Commerce.Controllers.CartsController",
+    "Method": "Add",
+    "RelativePath": "api/Carts",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cartRequest",
+        "Type": "E_Commerce.DAL.DTO.Request.CartRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "E_Commerce.Controllers.CategoriesController",
     "Method": "GetAll",
     "RelativePath": "api/Categories",

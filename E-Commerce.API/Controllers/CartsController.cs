@@ -1,5 +1,6 @@
 ﻿using E_Commerce.BLL.Service.Interfaces;
 using E_Commerce.DAL.DTO.Request;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -8,6 +9,7 @@ namespace E_Commerce.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Customer")]
     public class CartsController : ControllerBase
     {
         private readonly ICartService _cartService;
