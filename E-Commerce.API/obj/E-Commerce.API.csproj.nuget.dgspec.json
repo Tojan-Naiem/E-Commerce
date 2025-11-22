@@ -191,6 +191,10 @@
             "Microsoft.Extensions.Localization": {
               "target": "Package",
               "version": "[9.0.10, )"
+            },
+            "Stripe.net": {
+              "target": "Package",
+              "version": "[50.0.0, )"
             }
           },
           "imports": [
