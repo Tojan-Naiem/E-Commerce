@@ -2,6 +2,7 @@
 using E_Commerce.DAL.DTO.Request;
 using E_Commerce.DAL.DTO.Response;
 using E_Commerce.DAL.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
@@ -119,7 +120,7 @@ namespace E_Commerce.BLL.Service.Classes
             return "Email confirmation failed";
         }
 
-        public async Task<UserResponse> RegisterAsync(RegisterRequest request)
+        public async Task<UserResponse> RegisterAsync(RegisterRequest request, HttpRequest httpRequest)
         {
             var existUser = await _userManager.FindByEmailAsync(request.Email);
             if(existUser is not null)
@@ -141,7 +142,7 @@ namespace E_Commerce.BLL.Service.Classes
             {
                 var token =await  _userManager.GenerateEmailConfirmationTokenAsync(user);
                 var escapeToken = Uri.EscapeDataString(token); 
-                var emailUrl = $"https://localhost:7039/api/Account/ConfirmedEmail?token={escapeToken}&userId={user.Id}";
+                var emailUrl = $"{httpRequest.Scheme}//{httpRequest.Host}/api/Account/ConfirmedEmail?token={escapeToken}&userId={user.Id}";
                 await _emailSender.SendEmailAsync(user.Email, $"Welcome to the new user for my lovely ecommerce >3", $"Welcome , we are totaly happy that u register to our ecommerce ," +
                     $" we are too lucky cuz we have a new member ! lolololololoishhhhhhhhhhhhhhhhhhhhhhhhhhhhh <a href='{emailUrl}'>confirm email</a> ");
                 return new UserResponse()

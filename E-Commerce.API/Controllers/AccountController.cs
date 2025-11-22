@@ -20,7 +20,7 @@ namespace E_Commerce.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<UserResponse>> Register([FromBody] RegisterRequest request)
         {
-            var result =await _authenticationService.RegisterAsync(request);
+            var result =await _authenticationService.RegisterAsync(request,Request);
             return Ok(result);
         }
         [HttpPost("login")]
