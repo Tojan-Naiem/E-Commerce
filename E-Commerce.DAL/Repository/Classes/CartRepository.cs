@@ -1,7 +1,9 @@
 ﻿using E_Commerce.DAL.DTO.Request;
+using E_Commerce.DAL.DTO.Response;
 using E_Commerce.DAL.Model;
 using E_Commerce.DAL.Repository.Interfaces;
 using E_Commerce.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +25,14 @@ namespace E_Commerce.DAL.Repository.Classes
             await _dbContext.SaveChangesAsync();
             return true;
 
+        }
+
+        public async Task<List<Cart>> Get(string UserId)
+        {
+            return await _dbContext.Cart.Include(
+                c => c.Product
+                ).Where(c => c.UserId == UserId).ToListAsync();
+            
         }
     }
 }

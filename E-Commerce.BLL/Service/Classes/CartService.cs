@@ -1,5 +1,6 @@
 ﻿using E_Commerce.BLL.Service.Interfaces;
 using E_Commerce.DAL.DTO.Request;
+using E_Commerce.DAL.DTO.Response;
 using E_Commerce.DAL.Model;
 using E_Commerce.DAL.Repository.Interfaces;
 using System;
@@ -17,7 +18,7 @@ namespace E_Commerce.BLL.Service.Classes
         {
             _cartRepository = cartRepository;
         }
-        public async Task<bool> addToCart(CartRequest Cart, string UserId)
+        public async Task<bool> AddToCart(CartRequest Cart, string UserId)
         {
             var newItem = new Cart()
             {
@@ -26,6 +27,23 @@ namespace E_Commerce.BLL.Service.Classes
                 ProductId=Cart.ProductId
             };
             return await _cartRepository.Add(newItem);
+        }
+
+        public async Task<CartSummary> GetUserCart(string UserId)
+        {
+            var UserCart =await _cartRepository.Get(UserId);
+            var response = new CartSummary()
+            {
+                Items = UserCart.Select(c => new CartResponse()
+                {
+                    ProductId = c.ProductId,
+                    ProductName = c.Product.Name,
+                    Count = c.Count,
+                    Price=c.Product.Price
+                }
+                ).ToList()
+            };
+            return response;
         }
     }
 }

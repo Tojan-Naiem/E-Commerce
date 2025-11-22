@@ -21,8 +21,15 @@ namespace E_Commerce.Controllers
         public async Task<IActionResult> Add([FromBody]CartRequest cartRequest)
         {
             var UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var result=await _cartService.addToCart(cartRequest, UserId);
+            var result=await _cartService.AddToCart(cartRequest, UserId);
             return result?Ok("Done"):BadRequest();
+        }
+        [HttpGet("")]
+        public async Task<IActionResult> Get()
+        {
+            var UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var result = await _cartService.GetUserCart(UserId);
+            return Ok(result);
         }
     }
 }
