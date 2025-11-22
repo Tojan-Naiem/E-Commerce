@@ -23,16 +23,20 @@ namespace E_Commerce.BLL.Service.Classes
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IConfiguration _configuration;
         private readonly IEmailSender _emailSender;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         public AuthenticationService(
              UserManager<ApplicationUser> userManager,
              IConfiguration configuration,
-             IEmailSender emailSender
+             IEmailSender emailSender,
+             SignInManager<ApplicationUser> signInManager
             )
         {
             _configuration = configuration;
             _userManager = userManager;
             _emailSender = emailSender;
-           
+            _signInManager = signInManager;
+
+
         }
         public async Task<bool>ForgotPassword(ForgotPasswordRequest request)
         {
@@ -83,27 +87,31 @@ namespace E_Commerce.BLL.Service.Classes
                     Token = "Not found"
                 };
             }
-            if (!await _userManager.IsEmailConfirmedAsync(user))
+            var result= await _signInManager.CheckPasswordSignInAsync(user, request.Password, true);
+            if(result.Succeeded)
+            {
+                return new UserResponse()
+                {
+                    // create token
+                    Token = await CreateTokenAsync(user)
+                };
+            }
+            else if (result.IsLockedOut)
+            {
+                throw new Exception("Your account is locked");
+
+            }
+            else if (result.IsNotAllowed)
             {
                 throw new Exception("Not confirmed email");
-            }
 
-            if (!await _userManager.IsEmailConfirmedAsync(user))
+            }
+            else
             {
                 throw new Exception("Plz confirm ur email ! ");
-            }
-            var isCorrect = await _userManager.CheckPasswordAsync(user, request.Password);
-            if (!isCorrect)
-            {
-                throw new Exception("Invalid Password");
-            }
-        
 
-            return new UserResponse()
-            {
-                // create token
-                Token = await CreateTokenAsync(user)
-            };
+            }
+         
         }
         public async Task<string>ConfirmEmail(string token,string userId)
         {
