@@ -150,7 +150,7 @@ namespace E_Commerce.BLL.Service.Classes
             {
                 var token =await  _userManager.GenerateEmailConfirmationTokenAsync(user);
                 var escapeToken = Uri.EscapeDataString(token); 
-                var emailUrl = $"{httpRequest.Scheme}//{httpRequest.Host}/api/Account/ConfirmedEmail?token={escapeToken}&userId={user.Id}";
+                var emailUrl = $"{httpRequest.Scheme}://{httpRequest.Host}/api/Account/ConfirmedEmail?token={escapeToken}&userId={user.Id}";
                 await _emailSender.SendEmailAsync(user.Email, $"Welcome to the new user for my lovely ecommerce >3", $"Welcome , we are totaly happy that u register to our ecommerce ," +
                     $" we are too lucky cuz we have a new member ! lolololololoishhhhhhhhhhhhhhhhhhhhhhhhhhhhh <a href='{emailUrl}'>confirm email</a> ");
                 return new UserResponse()
