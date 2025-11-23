@@ -49,7 +49,6 @@ C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\Microsoft.OpenApi.dll
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\Microsoft.SqlServer.Server.dll
-C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\Mono.TextTemplating.dll
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
@@ -62,15 +61,12 @@ C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\System.Composition.Runtime.dll
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\System.Composition.TypedParts.dll
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\System.Configuration.ConfigurationManager.dll
-C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\System.Drawing.Common.dll
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\System.Formats.Asn1.dll
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\System.Memory.Data.dll
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\System.Runtime.Caching.dll
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\System.Security.Permissions.dll
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\System.Text.Json.dll
-C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\System.Windows.Extensions.dll
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.resources.dll
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.resources.dll
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.resources.dll
@@ -142,12 +138,7 @@ C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
-C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
-C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
-C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
-C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\E-Commerce.BLL.dll
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\E-Commerce.DAL.dll
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\E-Commerce.BLL.pdb
@@ -186,3 +177,5 @@ C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\Microsoft.Extensions.FileProviders.Abstractions.dll
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\Microsoft.Extensions.FileProviders.Embedded.dll
 C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\E-Commerce.API.staticwebassets.runtime.json
+C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\Newtonsoft.Json.dll
+C:\Users\Tojan AboGhola\Desktop\asp .net course\course\E-Commerce\E-Commerce.API\bin\Debug\net9.0\Stripe.net.dll
