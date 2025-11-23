@@ -15,7 +15,7 @@ namespace E_Commerce.DAL.DTO.Response
         public string Name { get; set; }
         [JsonIgnore]
         public string Image { get; set; }
-        public string MainImageUrl => $"https://localhost:7039/Images/{MainImage}";
+        public string MainImageUrl => $"https://localhost:7039/Images/{Image}";
 
     }
 }
