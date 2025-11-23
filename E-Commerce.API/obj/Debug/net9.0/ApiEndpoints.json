@@ -169,9 +169,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "brandRequestDTO",
-        "Type": "E_Commerce.DAL.DTO.Request.BrandRequestDTO",
-        "IsRequired": true
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Image",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -377,6 +382,22 @@
       {
         "Name": "id",
         "Type": "System.Int64",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_Commerce.Controllers.CheckOutController",
+    "Method": "Payment",
+    "RelativePath": "api/CheckOut/payment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "E_Commerce.DAL.DTO.Request.CheckOutRequest",
         "IsRequired": true
       }
     ],
