@@ -13,7 +13,8 @@ namespace E_Commerce.BLL.Service.Interfaces
 {
     public interface IBrandService:IGenericService<BrandRequestDTO,BrandResponseDTO,Brand>
     {
-     
+        public  Task<long> CreateFile(BrandRequestDTO request);
+        public Task<bool> DeleteFile(long id);
 
     }
 }

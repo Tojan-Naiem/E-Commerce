@@ -21,11 +21,41 @@ namespace E_Commerce.BLL.Service.Classes
 
     public class BrandService:GenericService<BrandRequestDTO,BrandResponseDTO,Brand> ,IBrandService
     {
+        private readonly IFileService _fileService;
+        private readonly IBrandRepository _brandRepository;
         public BrandService(
-IBrandRepository brandRepository      ):base(brandRepository)
+            IBrandRepository brandRepository,
+            IFileService fileService
+            ):base(brandRepository)
         {
+            _brandRepository = brandRepository;
+            _fileService = fileService;
+
+        }
+        
+      
+        public async Task<long> CreateFile(BrandRequestDTO request)
+        {
+            var entity = request.Adapt<Brand>();
+            entity.CreatedAt = DateTime.Now;
+            if (request.Image is not null)
+            {
+                var imagePath = await _fileService.UploadAsync(request.Image);
+                entity.Image = imagePath;
+            }
+            await _brandRepository.Save(entity);
+            return entity.Id;
+        }
+        public async Task<bool> DeleteFile(long id)
+        {
+            var entity = _brandRepository.GetById(id);
+            bool successDelete = await _fileService.DeleteAsync(entity.Image);
+            if (successDelete is false)
+                throw new Exception("Error");
+            await _brandRepository.Remove(entity);
+            return true;
         }
 
-      
+
     }
 }
