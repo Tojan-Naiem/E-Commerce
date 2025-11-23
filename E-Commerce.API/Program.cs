@@ -43,7 +43,12 @@ builder.Services.AddScoped<ICheckOutRepository, CheckOutRepository>();
 builder.Services.AddScoped<ICheckOutService, CheckOutService>();
 
 builder.Services.AddScoped<ISeedData,SeedData>();
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(
+     options =>
+     {
+         options.SignIn.RequireConfirmedEmail = true;
+     }
+    )
     .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
 
@@ -94,6 +99,8 @@ builder.Services.AddAuthentication(options =>
         });
 builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
 StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
+
+
 var app = builder.Build();
 app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 
