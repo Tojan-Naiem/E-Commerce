@@ -43,8 +43,8 @@ namespace E_Commerce.DAL.Utils
             if (!await _dbContext.Brands.AnyAsync())
             {
                 await _dbContext.Brands.AddRangeAsync(
-                    new Brand { Name = "Iphone" },
-                    new Brand { Name = "Samsong" }
+                    new Brand { Name = "Iphone",Image="tojan.png" },
+                    new Brand { Name = "Samsong",Image = "tojan.png" }
                     );
             }
             await _dbContext.SaveChangesAsync();
