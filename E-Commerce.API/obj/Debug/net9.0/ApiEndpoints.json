@@ -389,6 +389,16 @@
   },
   {
     "ContainingType": "E_Commerce.Controllers.CheckOutController",
+    "Method": "Cancel",
+    "RelativePath": "api/CheckOut/cancel",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_Commerce.Controllers.CheckOutController",
     "Method": "Payment",
     "RelativePath": "api/CheckOut/payment",
     "HttpMethod": "POST",
@@ -401,6 +411,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_Commerce.Controllers.CheckOutController",
+    "Method": "Success",
+    "RelativePath": "api/CheckOut/success",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

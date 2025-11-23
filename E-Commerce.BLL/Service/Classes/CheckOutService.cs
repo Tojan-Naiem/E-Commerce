@@ -48,8 +48,8 @@ namespace E_Commerce.BLL.Service.Classes
 
             },
                     Mode = "payment",
-                    SuccessUrl = $"{httpRequest.Scheme}://{httpRequest.Host}/checkout/success",
-                    CancelUrl = $"{httpRequest.Scheme}://{httpRequest.Host}/checkout/cancel",
+                    SuccessUrl = $"{httpRequest.Scheme}://{httpRequest.Host}/api/checkout/success",
+                    CancelUrl = $"{httpRequest.Scheme}://{httpRequest.Host}/api/checkout/cancel",
                 };
                 foreach(var item in cartItems)
                 {

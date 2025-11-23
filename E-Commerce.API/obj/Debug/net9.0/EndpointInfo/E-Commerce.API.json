@@ -693,6 +693,30 @@
         }
       }
     },
+    "/api/CheckOut/success": {
+      "get": {
+        "tags": [
+          "CheckOut"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/CheckOut/cancel": {
+      "get": {
+        "tags": [
+          "CheckOut"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Products": {
       "get": {
         "tags": [
