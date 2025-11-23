@@ -1,4 +1,5 @@
 ﻿using E_Commerce.Model;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -14,5 +15,6 @@ namespace E_Commerce.DAL.DTO.Request
         [Required]
         [MinLength(2, ErrorMessage = "The name must be more than 2 chars")]
         public string? Name { get; set; }
+        public IFormFile Image { get; set; }
     }
 }
