@@ -43,7 +43,7 @@ namespace E_Commerce.Controllers
             return Ok(brandResponseDTO);
         }
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] BrandRequestDTO brandRequestDTO)
+        public async Task<IActionResult> Create([FromForm] BrandRequestDTO brandRequestDTO)
         {
             await _brandService.CreateFile(brandRequestDTO);
             return StatusCode(StatusCodes.Status201Created);
