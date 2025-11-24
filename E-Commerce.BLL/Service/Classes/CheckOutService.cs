@@ -19,6 +19,12 @@ namespace E_Commerce.BLL.Service.Classes
         {
             _cartRepository = cartRepository;
         }
+
+        public Task<bool> HandlePaymentSuccessAsync(int orderId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<CheckOutResponse> ProcessPaymentAsync(CheckOutRequest request, string UserId,HttpRequest httpRequest)
         {
             var cartItems = await _cartRepository.Get(UserId);
