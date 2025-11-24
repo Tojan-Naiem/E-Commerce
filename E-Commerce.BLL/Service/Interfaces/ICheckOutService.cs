@@ -11,6 +11,7 @@ namespace E_Commerce.BLL.Service.Interfaces
 {
     public interface ICheckOutService
     {
-        public Task<CheckOutResponse> ProcessPaymentAsync(CheckOutRequest request, string UserId, HttpRequest httpRequest);
+            public Task<CheckOutResponse> ProcessPaymentAsync(CheckOutRequest request, string UserId, HttpRequest httpRequest);
+            public Task<bool> HandlePaymentSuccessAsync(int orderId);
     }
 }
