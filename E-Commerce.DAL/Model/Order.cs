@@ -32,5 +32,6 @@ namespace E_Commerce.DAL.Model
         public string? TrackingNumber { get; set; }
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
+        public decimal TotalAmount { get; set; }
     }
 }
