@@ -1,4 +1,5 @@
-﻿using System;
+﻿using E_Commerce.DAL.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace E_Commerce.DAL.DTO.Request
 {
     public class CheckOutRequest
     {
-        public string PaymentMethod { get; set; }
+        public PaymentMethod PaymentMethod { get; set; }
     }
 }
