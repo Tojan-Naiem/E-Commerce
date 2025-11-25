@@ -36,7 +36,8 @@ namespace E_Commerce.BLL.Service.Classes
                     Message="No Cart for this user"
                 };
             }
-            if (request.PaymentMethod == "Cash")
+            
+            if (request.PaymentMethod == DAL.Model.PaymentMethod.Cash)
             {
                 return new CheckOutResponse()
                 {
@@ -44,7 +45,7 @@ namespace E_Commerce.BLL.Service.Classes
                     Message = "Payment session created successfully",
                 };
             }
-            if (request.PaymentMethod == "Visa")
+            if (request.PaymentMethod == DAL.Model.PaymentMethod.Visa)
             {
                 var options = new SessionCreateOptions
                 {
