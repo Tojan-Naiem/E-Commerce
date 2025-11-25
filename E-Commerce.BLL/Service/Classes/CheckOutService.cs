@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using E_Commerce.DAL.Model;
 namespace E_Commerce.BLL.Service.Classes
 {
     public class CheckOutService : ICheckOutService
@@ -39,14 +39,28 @@ namespace E_Commerce.BLL.Service.Classes
             
             if (request.PaymentMethod == DAL.Model.PaymentMethod.Cash)
             {
+                Order order = new Order()
+                {
+                    UserId = UserId,
+                    PaymentMethod = PaymentMethod.Cash,
+                    TotalAmount = cartItems.Sum(c => c.Product.Price * c.Count)
+                };
                 return new CheckOutResponse()
                 {
                     Success = true,
                     Message = "Payment session created successfully",
                 };
+
             }
             if (request.PaymentMethod == DAL.Model.PaymentMethod.Visa)
             {
+                Order order = new Order()
+                {
+                    UserId = UserId,
+                    PaymentMethod = PaymentMethod.Visa,
+                    TotalAmount = cartItems.Sum(c => c.Product.Price * c.Count)
+
+                };
                 var options = new SessionCreateOptions
                 {
                     PaymentMethodTypes = new List<string> { "card" },
@@ -55,7 +69,7 @@ namespace E_Commerce.BLL.Service.Classes
 
             },
                     Mode = "payment",
-                    SuccessUrl = $"{httpRequest.Scheme}://{httpRequest.Host}/api/checkout/success",
+                    SuccessUrl = $"{httpRequest.Scheme}://{httpRequest.Host}/api/checkout/success/{order.Id}",
                     CancelUrl = $"{httpRequest.Scheme}://{httpRequest.Host}/api/checkout/cancel",
                 };
                 foreach(var item in cartItems)
@@ -79,10 +93,12 @@ namespace E_Commerce.BLL.Service.Classes
                 }
                 var service = new SessionService();
                 var session = service.Create(options);
+                order.PaymentId = session.Id;
                 return new CheckOutResponse()
                 {
                     Success = true,
                     Message = "Payment session created successfully",
+                    PaymentId = session.Id,
                     Url = session.Url
                 };
             }
