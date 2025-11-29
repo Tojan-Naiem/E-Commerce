@@ -1,6 +1,7 @@
 ﻿using E_Commerce.DAL.Model;
 using E_Commerce.DAL.Repository.Interfaces;
 using E_Commerce.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +19,9 @@ namespace E_Commerce.DAL.Repository.Classes
         {
             _dbContext = dbContext;
         }
-        public Task<Order> GetUserByOrderId (int orderId){
-            
-           }
+        public async Task<Order?> GetUserByOrderId (int orderId){
+            return await _dbContext.Orders.Include(o => o.User)
+                 .FirstOrDefaultAsync(o => o.Id == orderId);
+        }
     }
 }
