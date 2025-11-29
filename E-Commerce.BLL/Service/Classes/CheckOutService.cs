@@ -1,28 +1,55 @@
 ﻿using E_Commerce.BLL.Service.Interfaces;
 using E_Commerce.DAL.DTO.Request;
 using E_Commerce.DAL.DTO.Response;
+using E_Commerce.DAL.Model;
+using E_Commerce.DAL.Repository.Classes;
 using E_Commerce.DAL.Repository.Interfaces;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Stripe.Checkout;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using E_Commerce.DAL.Model;
 namespace E_Commerce.BLL.Service.Classes
 {
     public class CheckOutService : ICheckOutService
     {
         private readonly ICartRepository _cartRepository;
-        public CheckOutService(ICartRepository cartRepository)
+        private readonly IOrderRepository _orderRepository;
+        private readonly IEmailSender _emailSender;
+        public CheckOutService(
+            ICartRepository cartRepository,
+            IOrderRepository orderRepository,
+            IEmailSender emailSender
+            )
         {
+            _orderRepository = orderRepository;
             _cartRepository = cartRepository;
+            _emailSender = emailSender;
         }
 
         public async Task<bool> HandlePaymentSuccessAsync(int orderId)
         {
-            
+            var order = await _orderRepository.GetUserByOrderId(orderId);
+            var subject = "";
+            var body = "";
+            if (order.PaymentMethod == PaymentMethod.Visa)
+            {
+                subject = "Payment Successful";
+                body = $"Thank u for ur payment , ur payment for order {orderId}, total amount={order.TotalAmount}";
+            }
+            else if (order.PaymentMethod == PaymentMethod.Cash)
+            {
+                subject = "Order Successful";
+                body = $"Thank u for ur order , ur order  {orderId}, total amount={order.TotalAmount}";
+            }
+            else return false;
+                await _emailSender.SendEmailAsync(order.User.Email, subject, body);
+            return true;
+
+
         }
 
         public async Task<CheckOutResponse> ProcessPaymentAsync(CheckOutRequest request, string UserId,HttpRequest httpRequest)
