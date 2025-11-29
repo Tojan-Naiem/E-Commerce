@@ -27,9 +27,9 @@ namespace E_Commerce.Controllers
         }
         [HttpGet("success/{orderId}")]
         [AllowAnonymous]
-        public ActionResult Success([FromRoute] int orderId)
+        public async Task<ActionResult> Success([FromRoute] int orderId)
         {
-            var result = _checkOutService.HandlePaymentSuccessAsync(orderId);
+            var result = await _checkOutService.HandlePaymentSuccessAsync(orderId);
             return Ok(result);
         }
         [HttpGet("cancel")]
