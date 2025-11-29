@@ -25,11 +25,12 @@ namespace E_Commerce.Controllers
             var response = await _checkOutService.ProcessPaymentAsync(request, userId, Request);
             return Ok(response);
         }
-        [HttpGet("success")]
+        [HttpGet("success/{orderId}")]
         [AllowAnonymous]
-        public ActionResult Success()
+        public ActionResult Success([FromRoute] int orderId)
         {
-            return Ok("Success");
+            var result = _checkOutService.HandlePaymentSuccessAsync(orderId);
+            return Ok(result);
         }
         [HttpGet("cancel")]
         [AllowAnonymous]
