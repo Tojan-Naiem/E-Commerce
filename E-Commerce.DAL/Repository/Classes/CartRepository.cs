@@ -34,5 +34,9 @@ namespace E_Commerce.DAL.Repository.Classes
                 ).Where(c => c.UserId == UserId).ToListAsync();
             
         }
+        public async Task Delete(Cart Cart)
+        {
+            _dbContext.Cart.Remove(Cart);
+        }
     }
 }
