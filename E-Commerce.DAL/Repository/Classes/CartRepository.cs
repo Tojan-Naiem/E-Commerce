@@ -38,5 +38,9 @@ namespace E_Commerce.DAL.Repository.Classes
         {
             _dbContext.Cart.Remove(Cart);
         }
+        public async Task SaveChangesInDatabase()
+        {
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }
