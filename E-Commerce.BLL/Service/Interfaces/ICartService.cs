@@ -12,5 +12,7 @@ namespace E_Commerce.BLL.Service.Interfaces
     {
         public Task<bool> AddToCart(CartRequest Cart, string UserId);
         public Task<CartSummary> GetUserCart(string UserId);
+        public Task<bool> DeleteCart(string UserId);
+
     }
 }

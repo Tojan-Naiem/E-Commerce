@@ -45,5 +45,19 @@ namespace E_Commerce.BLL.Service.Classes
             };
             return response;
         }
+        public async Task<bool> DeleteCart(string UserId)
+        {
+            var UserCart = await _cartRepository.Get(UserId);
+            if (UserCart is null)
+                return false;
+            foreach( var cart in UserCart)
+            {
+               await _cartRepository.Delete(cart);
+
+            }
+            await _cartRepository.SaveChangesInDatabase();
+
+            return true;
+        }
     }
 }
