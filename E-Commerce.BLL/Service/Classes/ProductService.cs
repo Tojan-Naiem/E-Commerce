@@ -49,5 +49,25 @@ namespace E_Commerce.BLL.Service.Classes
             await _productRepository.Remove(entity);
             return true;
         }
+        public async Task<bool> UpdateProductAsync(long id, ProductRequest request)
+        {
+            var entity =  _productRepository.GetById(id);
+            if (entity is null) return false;
+            entity.Name = request.Name!;
+            entity.Price = (decimal)request.Price!;
+            entity.Quantity = request.Quantity;
+            if (request.MainImage is not null)
+            {
+                if (!string.IsNullOrEmpty(entity.MainImage))
+                {
+                    await _fileService.DeleteAsync(entity.MainImage);
+                }
+                string newImage = await _fileService.UploadAsync(request.MainImage);
+                entity.MainImage = newImage;
+
+            }
+            await _productRepository.SaveChangesInDatabase();
+            return true;
+        }
     }
 }
