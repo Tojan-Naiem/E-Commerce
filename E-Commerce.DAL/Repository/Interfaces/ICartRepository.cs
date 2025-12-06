@@ -13,5 +13,7 @@ namespace E_Commerce.DAL.Repository.Interfaces
     {
         public Task<bool> Add(Cart Cart);
         public Task<List<Cart>> Get(string UserId);
+        public Task Delete(Cart Cart);
+
     }
 }
