@@ -24,6 +24,11 @@ using System.Text;
 
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+    options.InstanceName = "ecommerce_";
+});
 
 builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<CategoryRepository>();
