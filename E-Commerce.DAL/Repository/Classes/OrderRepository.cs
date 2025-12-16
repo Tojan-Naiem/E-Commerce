@@ -23,5 +23,9 @@ namespace E_Commerce.DAL.Repository.Classes
             return await _dbContext.Orders.Include(o => o.User)
                  .FirstOrDefaultAsync(o => o.Id == orderId);
         }
+        public async Task AddOrderAsync(Order order)
+        {
+            await _dbContext.Orders.AddAsync(order);
+        }
     }
 }
