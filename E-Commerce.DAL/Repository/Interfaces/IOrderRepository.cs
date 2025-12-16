@@ -10,5 +10,7 @@ namespace E_Commerce.DAL.Repository.Interfaces
     public interface IOrderRepository
     {
         public Task<Order> GetUserByOrderId(int orderId);
+        public Task AddOrderAsync(Order order);
+
     }
 }
