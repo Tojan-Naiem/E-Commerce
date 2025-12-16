@@ -88,6 +88,7 @@ namespace E_Commerce.BLL.Service.Classes
                     TotalAmount = cartItems.Sum(c => c.Product.Price * c.Count)
 
                 };
+                await _orderRepository.AddOrderAsync(order);
                 var options = new SessionCreateOptions
                 {
                     PaymentMethodTypes = new List<string> { "card" },

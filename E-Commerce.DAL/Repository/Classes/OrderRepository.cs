@@ -26,6 +26,7 @@ namespace E_Commerce.DAL.Repository.Classes
         public async Task AddOrderAsync(Order order)
         {
             await _dbContext.Orders.AddAsync(order);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
