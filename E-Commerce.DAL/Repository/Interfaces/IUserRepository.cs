@@ -11,5 +11,7 @@ namespace E_Commerce.DAL.Repository.Interfaces
     {
         public Task<List<ApplicationUser>> GetAllAsync();
         public Task<ApplicationUser> GetByIdAsync(string UserId);
+        public Task<bool> BlockUserAsync(string UserId, int days);
+
     }
 }

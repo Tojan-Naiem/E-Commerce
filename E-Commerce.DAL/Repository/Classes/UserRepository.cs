@@ -25,6 +25,14 @@ namespace E_Commerce.DAL.Repository.Classes
         {
             return await _userManager.FindByIdAsync(UserId);
         }
-
+        public async Task<bool>BlockUserAsync(string UserId,int days)
+        {
+            var user = await _userManager.FindByIdAsync(UserId);
+            if (user is null)
+                return false;
+            user.LockoutEnd = DateTime.UtcNow.AddDays(days);
+            var result = await _userManager.UpdateAsync(user);
+            return result.Succeeded;
+        }
     }
 }
