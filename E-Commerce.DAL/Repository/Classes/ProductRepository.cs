@@ -18,13 +18,13 @@ namespace E_Commerce.DAL.Repository.Classes
         {
             _dbContext = dbContext;
         }
-        public async Task DecreaseProductQuantityAsync(int ProductId,int quantity)
+        public async Task DecreaseProductQuantityAsync(long ProductId,int quantity)
         {
             var product =await _dbContext.Products.FindAsync(ProductId);
             if (product is null) throw new Exception("Product not found");
             if (product.Quantity < quantity)
             {
-                throw new Exception("Product stock not enouph");
+                throw new Exception("Product stock not enough");
             }
             product.Quantity -= quantity;
             await _dbContext.SaveChangesAsync();
