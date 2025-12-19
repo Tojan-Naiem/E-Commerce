@@ -18,5 +18,11 @@ namespace E_Commerce.DAL.Repository.Classes
         {
             _dbContext = dbContext;
         }
+        public async Task DecreaseProductQuantityAsync(Product product)
+        {
+            product.Quantity -= 1;
+            await _dbContext.SaveChangesAsync();
+
+        }
     }
 }
