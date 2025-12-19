@@ -29,5 +29,10 @@ namespace E_Commerce.BLL.Service.Classes
             var users = await _userRepository.GetByIdAsync(UserId);
             return users.Adapt<UserDTO>();
         }
+        public async Task<bool> BlockUserAsync(string UserId,int days)
+        {
+            var result = await _userRepository.BlockUserAsync(UserId, days);
+            return result;
+        }
     }
 }

@@ -12,6 +12,8 @@ namespace E_Commerce.BLL.Service.Interfaces
     {
         public Task<List<UserDTO>> GetAllAsync();
         public Task<UserDTO> GetByIdAsync(string UserId);
+        public Task<bool> BlockUserAsync(string UserId, int days);
+
 
     }
 }
