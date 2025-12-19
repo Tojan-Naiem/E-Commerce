@@ -18,9 +18,11 @@ namespace E_Commerce.DAL.Repository.Classes
         {
             _dbContext = dbContext;
         }
-        public async Task DecreaseProductQuantityAsync(Product product)
+        public async Task DecreaseProductQuantityAsync(int ProductId,int quantity)
         {
-            product.Quantity -= 1;
+            var product =await _dbContext.Products.FindAsync(ProductId);
+            if (product is null) throw new Exception("Product not found");
+            product.Quantity -= quantity;
             await _dbContext.SaveChangesAsync();
 
         }
