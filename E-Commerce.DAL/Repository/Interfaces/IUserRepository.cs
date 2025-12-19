@@ -15,6 +15,7 @@ namespace E_Commerce.DAL.Repository.Interfaces
         public Task<bool> UnBlockUserAsync(string UserId);
         public Task<bool> IsBlocked(string UserId);
         public Task<bool> ChangeUserRoleToAdmin(string UserId);
+        public Task<bool> RemoveAdminRoleFromUser(string UserId);
 
     }
 }
