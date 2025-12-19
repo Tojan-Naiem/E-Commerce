@@ -25,5 +25,11 @@ namespace E_Commerce.Controllers
             var user = await _userService.GetByIdAsync(id);
             return Ok(user);
         }
+        [HttpPost("{id}")]
+        public async Task<IActionResult> UnBlockUserAsync([FromRoute] string id)
+        {
+            var user = await _userService.UnBlockUserAsync(id);
+            return Ok(user);
+        }
     }
 }
