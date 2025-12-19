@@ -46,6 +46,7 @@ namespace E_Commerce.BLL.Service.Classes
                     TotalPrice = cartItem.Product.Price * cartItem.Count
                 }).ToList();
                 await _orderRepository.AddOrderItemsAsync(orderItems);
+                await _cartRepository.ClearCartAsync(order.UserId);
                 subject = "Payment Successful";
                 body = $"Thank u for ur payment , ur payment for order {orderId}, total amount={order.TotalAmount}";
             }
