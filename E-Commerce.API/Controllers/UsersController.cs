@@ -54,5 +54,38 @@ namespace E_Commerce.Controllers
                 return NotFound();
             return Ok(user);
         }
+        [HttpPatch("RoleToAdmin/{id}")]
+        public async Task<IActionResult> ChangeUserRoleToAdmin([FromRoute] string id)
+        {
+            try
+            {
+                var user = await _userService.ChangeUserRoleToAdmin(id);
+                if (user is false)
+                    return BadRequest();
+                return Ok(user);
+
+            }
+            catch (Exception e)
+            {
+                return NotFound("User not found");
+            }
+        }
+        [HttpPatch("RemoveAdmin/{id}")]
+        public async Task<IActionResult> RemoveAdminRoleFromUser([FromRoute] string id)
+        {
+            try
+            {
+                var user = await _userService.RemoveAdminRoleFromUser(id);
+                if (user is false)
+                    return BadRequest();
+                return Ok(user);
+
+            }
+            catch (Exception e)
+            {
+                return NotFound("User not found");
+            }
+          
+        }
     }
 }
