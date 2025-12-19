@@ -34,5 +34,14 @@ namespace E_Commerce.DAL.Repository.Classes
             var result = await _userManager.UpdateAsync(user);
             return result.Succeeded;
         }
+        public async Task<bool> UnBlockUserAsync(string UserId)
+        {
+            var user = await _userManager.FindByIdAsync(UserId);
+            if (user is null)
+                return false;
+            user.LockoutEnd = null);
+            var result = await _userManager.UpdateAsync(user);
+            return result.Succeeded;
+        }
     }
 }
