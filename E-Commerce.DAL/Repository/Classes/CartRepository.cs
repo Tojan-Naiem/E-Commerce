@@ -42,5 +42,17 @@ namespace E_Commerce.DAL.Repository.Classes
         {
             await _dbContext.SaveChangesAsync();
         }
+        public async Task<bool> ClearCartAsync(string UserId)
+        {
+            var items = _dbContext.Cart.Where(c => c.UserId == UserId);
+            if (items.Any())
+            {
+                 _dbContext.Cart.RemoveRange(items);
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+            return false;
+        }
+
     }
 }
