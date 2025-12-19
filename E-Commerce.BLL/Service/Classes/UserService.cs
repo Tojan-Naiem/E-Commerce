@@ -44,5 +44,15 @@ namespace E_Commerce.BLL.Service.Classes
             var result = await _userRepository.IsBlocked(UserId);
             return result;
         }
+        public async Task<bool> ChangeUserRoleToAdmin(string UserId)
+        {
+            var result = await _userRepository.ChangeUserRoleToAdmin(UserId);
+            return result;
+        }
+        public async Task<bool> RemoveAdminRoleFromUser(string UserId)
+        {
+            var result = await _userRepository.RemoveAdminRoleFromUser(UserId);
+            return result;
+        }
     }
 }
