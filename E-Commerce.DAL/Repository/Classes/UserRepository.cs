@@ -1,4 +1,7 @@
-﻿using E_Commerce.DAL.Repository.Interfaces;
+﻿using E_Commerce.DAL.Model;
+using E_Commerce.DAL.Repository.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +12,19 @@ namespace E_Commerce.DAL.Repository.Classes
 {
     public class UserRepository:IUserRepository
     {
+        private readonly UserManager<ApplicationUser> _userManager;
+        public UserRepository(UserManager<ApplicationUser> userManager)
+        {
+            _userManager = userManager;
+        }
+        public async Task<List<ApplicationUser>> GetAllAsync()
+        {
+            return await _userManager.Users.ToListAsync();
+        }
+        public async Task<ApplicationUser> GetByIdAsync(string UserId)
+        {
+            return await _userManager.FindByIdAsync(UserId);
+        }
+
     }
 }
