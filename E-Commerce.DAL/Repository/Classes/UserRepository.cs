@@ -63,7 +63,26 @@ namespace E_Commerce.DAL.Repository.Classes
                     return false;
             }
             await _userManager.AddToRoleAsync(user,"Admin");
-            return true;
+            var result = await _userManager.UpdateAsync(user);
+            return result.Succeeded;
+        }
+        public async Task<bool> RemoveAdminRoleFromUser(string UserId)
+        {
+            var user = await _userManager.FindByIdAsync(UserId);
+            if (user is null)
+                throw new Exception("User id not found");
+            var userRoles = await _userManager.GetRolesAsync(user);
+            foreach (var role in userRoles)
+            {
+                if (role == "Admin")
+                {
+                    await _userManager.RemoveFromRoleAsync(user,"Admin");
+                    var result = await _userManager.UpdateAsync(user);
+                    return result.Succeeded;
+
+                }
+            }
+            return false;
         }
     }
 }
