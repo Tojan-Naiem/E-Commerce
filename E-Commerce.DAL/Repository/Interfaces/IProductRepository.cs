@@ -10,5 +10,7 @@ namespace E_Commerce.DAL.Repository.Interfaces
 {
     public interface IProductRepository : IGenericRepository<Product>
     {
+        public Task DecreaseProductQuantityAsync(Product product);
+
     }
 }
