@@ -1,4 +1,5 @@
 ﻿using E_Commerce.BLL.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,6 +7,8 @@ namespace E_Commerce.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
+
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
