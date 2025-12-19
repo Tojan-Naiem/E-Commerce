@@ -32,5 +32,9 @@ namespace E_Commerce.DAL.Repository.Classes
         {
            await _dbContext.OrderItems.AddRangeAsync(orderItems);
         }
+        public async Task<List<Order>> GetByStatusAsync(OrderStatus status)
+        {
+            return await _dbContext.Orders.Where(o => o.Status == status).OrderByDescending(O=>O.OrderDate).ToListAsync();
+        }
     }
 }
