@@ -34,7 +34,7 @@ namespace E_Commerce.BLL.Service.Classes
             var result = await _userRepository.BlockUserAsync(UserId, days);
             return result;
         }
-        public async Task<bool> UnBlockUserAsync(string UserId, int days)
+        public async Task<bool> UnBlockUserAsync(string UserId)
         {
             var result = await _userRepository.UnBlockUserAsync(UserId);
             return result;
