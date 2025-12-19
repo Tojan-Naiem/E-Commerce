@@ -37,6 +37,15 @@ namespace E_Commerce.BLL.Service.Classes
             var body = "";
             if (order.PaymentMethod == PaymentMethod.Visa)
             {
+                order.Status = OrderStatus.Approved;
+                var carts = await _cartRepository.GetAsync(order.UserId);
+                var orderItems = carts.Select(cartItem => new OrderItem
+                {
+                    OrderId = orderId,
+                    ProductId = cartItem.ProductId,
+                    TotalPrice = cartItem.Product.Price * cartItem.Count
+                }).ToList();
+                await _orderRepository.AddOrderItemsAsync(orderItems);
                 subject = "Payment Successful";
                 body = $"Thank u for ur payment , ur payment for order {orderId}, total amount={order.TotalAmount}";
             }
@@ -54,7 +63,7 @@ namespace E_Commerce.BLL.Service.Classes
 
         public async Task<CheckOutResponse> ProcessPaymentAsync(CheckOutRequest request, string UserId,HttpRequest httpRequest)
         {
-            var cartItems = await _cartRepository.Get(UserId);
+            var cartItems = await _cartRepository.GetAsync(UserId);
             if(cartItems is null)
             {
                 return new CheckOutResponse()
