@@ -18,7 +18,7 @@ namespace E_Commerce.BLL.Service.Classes
         {
             _cartRepository = cartRepository;
         }
-        public async Task<bool> AddToCart(CartRequest Cart, string UserId)
+        public async Task<bool> AddToCartAsync(CartRequest Cart, string UserId)
         {
             var newItem = new Cart()
             {
@@ -26,12 +26,12 @@ namespace E_Commerce.BLL.Service.Classes
                 UserId=UserId,
                 ProductId=Cart.ProductId
             };
-            return await _cartRepository.Add(newItem);
+            return await _cartRepository.AddAsync(newItem);
         }
 
-        public async Task<CartSummary> GetUserCart(string UserId)
+        public async Task<CartSummary> GetUserCartAsync(string UserId)
         {
-            var UserCart =await _cartRepository.Get(UserId);
+            var UserCart =await _cartRepository.GetAsync(UserId);
             var response = new CartSummary()
             {
                 Items = UserCart.Select(c => new CartResponse()
@@ -45,17 +45,17 @@ namespace E_Commerce.BLL.Service.Classes
             };
             return response;
         }
-        public async Task<bool> DeleteCart(string UserId)
+        public async Task<bool> DeleteCartAsync(string UserId)
         {
-            var UserCart = await _cartRepository.Get(UserId);
+            var UserCart = await _cartRepository.GetAsync(UserId);
             if (UserCart is null)
                 return false;
             foreach( var cart in UserCart)
             {
-               await _cartRepository.Delete(cart);
+                _cartRepository.DeleteAsync(cart);
 
             }
-            await _cartRepository.SaveChangesInDatabase();
+            await _cartRepository.SaveChangesInDatabaseAsync();
 
             return true;
         }
