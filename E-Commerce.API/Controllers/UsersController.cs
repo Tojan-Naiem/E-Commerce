@@ -25,10 +25,22 @@ namespace E_Commerce.Controllers
             var user = await _userService.GetByIdAsync(id);
             return Ok(user);
         }
-        [HttpPost("{id}")]
+        [HttpPatch("unblock/{id}")]
         public async Task<IActionResult> UnBlockUserAsync([FromRoute] string id)
         {
             var user = await _userService.UnBlockUserAsync(id);
+            if (user is false)
+                return NotFound();
+            return Ok(user);
+        }
+        [HttpPatch("block/{id}/{days}")]
+        public async Task<IActionResult> BlockUserAsync([FromRoute] string id, [FromRoute] int days)
+        {
+            if (days <= 0)
+                return BadRequest("Days must be more than 1 day");
+            var user = await _userService.BlockUserAsync(id,days);
+            if (user is false)
+                return NotFound();
             return Ok(user);
         }
     }
