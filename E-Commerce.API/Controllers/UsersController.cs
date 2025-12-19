@@ -19,5 +19,11 @@ namespace E_Commerce.Controllers
             var users=await _userService.GetAllAsync();
             return Ok(users);
         }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUserById([FromRoute] string id)
+        {
+            var user = await _userService.GetByIdAsync(id);
+            return Ok(user);
+        }
     }
 }
