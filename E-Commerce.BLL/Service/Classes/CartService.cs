@@ -61,6 +61,9 @@ namespace E_Commerce.BLL.Service.Classes
         }
         public async Task<bool> ClearCartAsync(string userId)
         {
+            var result =await _cartRepository.ClearCartAsync(userId);
+            if (result is true) return true;
+            return false;
 
         }
 
