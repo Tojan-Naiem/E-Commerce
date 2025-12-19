@@ -51,5 +51,19 @@ namespace E_Commerce.DAL.Repository.Classes
         
             return user.LockoutEnd.HasValue&&user.LockoutEnd>DateTime.UtcNow;
         }
+        public async Task<bool> ChangeUserRoleToAdmin(string UserId)
+        {
+            var user = await _userManager.FindByIdAsync(UserId);
+            if (user is null)
+                throw new Exception("User id not found");
+            var userRoles = await _userManager.GetRolesAsync(user);
+            foreach(var role in userRoles)
+            {
+                if (role == "Admin")
+                    return false;
+            }
+            await _userManager.AddToRoleAsync(user,"Admin");
+            return true;
+        }
     }
 }
