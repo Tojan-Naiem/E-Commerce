@@ -39,9 +39,17 @@ namespace E_Commerce.DAL.Repository.Classes
             var user = await _userManager.FindByIdAsync(UserId);
             if (user is null)
                 return false;
-            user.LockoutEnd = null);
+            user.LockoutEnd = null;
             var result = await _userManager.UpdateAsync(user);
             return result.Succeeded;
+        }
+        public async Task<bool> IsBlocked(string UserId)
+        {
+            var user = await _userManager.FindByIdAsync(UserId);
+            if (user is null)
+                throw new Exception("User id not found");
+        
+            return user.LockoutEnd.HasValue&&user.LockoutEnd>DateTime.UtcNow;
         }
     }
 }
