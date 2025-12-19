@@ -43,5 +43,13 @@ namespace E_Commerce.Controllers
                 return NotFound();
             return Ok(user);
         }
+        [HttpGet("IsBlocked/{id}")]
+        public async Task<IActionResult> IsBlocked([FromRoute] string id)
+        {
+            var user = await _userService.IsBlocked(id);
+            if (user is false)
+                return NotFound();
+            return Ok(user);
+        }
     }
 }
