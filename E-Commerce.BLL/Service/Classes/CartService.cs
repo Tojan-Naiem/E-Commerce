@@ -59,5 +59,10 @@ namespace E_Commerce.BLL.Service.Classes
 
             return true;
         }
+        public async Task<bool> ClearCartAsync(string userId)
+        {
+
+        }
+
     }
 }

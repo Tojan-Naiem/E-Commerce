@@ -15,6 +15,7 @@ namespace E_Commerce.DAL.Repository.Interfaces
         public Task<List<Cart>> GetAsync(string UserId);
         public void DeleteAsync(Cart Cart);
         public Task SaveChangesInDatabaseAsync();
+        public Task<bool> ClearCartAsync(string UserId);
 
     }
 }
