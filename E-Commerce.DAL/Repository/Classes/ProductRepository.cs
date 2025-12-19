@@ -22,6 +22,10 @@ namespace E_Commerce.DAL.Repository.Classes
         {
             var product =await _dbContext.Products.FindAsync(ProductId);
             if (product is null) throw new Exception("Product not found");
+            if (product.Quantity < quantity)
+            {
+                throw new Exception("Product stock not enouph");
+            }
             product.Quantity -= quantity;
             await _dbContext.SaveChangesAsync();
 
