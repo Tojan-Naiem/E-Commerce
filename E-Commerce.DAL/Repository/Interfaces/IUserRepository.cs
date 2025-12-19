@@ -1,4 +1,5 @@
-﻿using System;
+﻿using E_Commerce.DAL.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,7 @@ namespace E_Commerce.DAL.Repository.Interfaces
 {
     public interface IUserRepository
     {
+        public Task<List<ApplicationUser>> GetAllAsync();
+        public Task<ApplicationUser> GetByIdAsync(string UserId);
     }
 }
