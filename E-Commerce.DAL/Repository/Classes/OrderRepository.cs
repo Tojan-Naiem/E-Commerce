@@ -36,5 +36,9 @@ namespace E_Commerce.DAL.Repository.Classes
         {
             return await _dbContext.Orders.Where(o => o.Status == status).OrderByDescending(O=>O.OrderDate).ToListAsync();
         }
+        public async Task<List<Order>> GetAllWithUserAsync(string UserId)
+        {
+            return await _dbContext.Orders.Where(o => o.UserId == UserId).OrderByDescending(O => O.OrderDate).ToListAsync();
+        }
     }
 }
