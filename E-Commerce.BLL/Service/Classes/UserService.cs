@@ -1,6 +1,8 @@
 ﻿using E_Commerce.BLL.Service.Interfaces;
+using E_Commerce.DAL.DTO.Response;
 using E_Commerce.DAL.Model;
 using E_Commerce.DAL.Repository.Interfaces;
+using Mapster;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,14 +18,16 @@ namespace E_Commerce.BLL.Service.Classes
         {
             _userRepository = userRepository;
         }
-        public async Task<List<ApplicationUser>> GetAllAsync()
+        public async Task<List<UserDTO>> GetAllAsync()
         {
-            return await _userRepository.GetAllAsync();
+            var users = await _userRepository.GetAllAsync();
+            return users.Adapt<List<UserDTO>>();
         }
 
-        public async Task<ApplicationUser> GetByIdAsync(string UserId)
+        public async Task<UserDTO> GetByIdAsync(string UserId)
         {
-            return await _userRepository.GetByIdAsync(UserId);
+            var users = await _userRepository.GetByIdAsync(UserId);
+            return users.Adapt<UserDTO>();
         }
     }
 }

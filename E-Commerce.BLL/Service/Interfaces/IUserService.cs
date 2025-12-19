@@ -1,4 +1,5 @@
-﻿using E_Commerce.DAL.Model;
+﻿using E_Commerce.DAL.DTO.Response;
+using E_Commerce.DAL.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,8 @@ namespace E_Commerce.BLL.Service.Interfaces
 {
     public interface IUserService
     {
-        public Task<List<ApplicationUser>> GetAllAsync();
-        public Task<ApplicationUser> GetByIdAsync(string UserId);
+        public Task<List<UserDTO>> GetAllAsync();
+        public Task<UserDTO> GetByIdAsync(string UserId);
 
     }
 }
