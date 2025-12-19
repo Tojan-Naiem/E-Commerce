@@ -19,15 +19,18 @@ namespace E_Commerce.BLL.Service.Classes
         private readonly ICartRepository _cartRepository;
         private readonly IOrderRepository _orderRepository;
         private readonly IEmailSender _emailSender;
+        private readonly IProductRepository _productRepository;
         public CheckOutService(
             ICartRepository cartRepository,
             IOrderRepository orderRepository,
-            IEmailSender emailSender
+            IEmailSender emailSender,
+            IProductRepository productRepository
             )
         {
             _orderRepository = orderRepository;
             _cartRepository = cartRepository;
             _emailSender = emailSender;
+            _productRepository = productRepository;
         }
 
         public async Task<bool> HandlePaymentSuccessAsync(int orderId)
@@ -43,10 +46,13 @@ namespace E_Commerce.BLL.Service.Classes
                 {
                     OrderId = orderId,
                     ProductId = cartItem.ProductId,
-                    TotalPrice = cartItem.Product.Price * cartItem.Count
+                    TotalPrice = cartItem.Product.Price * cartItem.Count,
+                    Count=cartItem.Count
                 }).ToList();
+              
                 await _orderRepository.AddOrderItemsAsync(orderItems);
                 await _cartRepository.ClearCartAsync(order.UserId);
+                await _productRepository.DecreaseProductQuantityAsync(orderItems.Select(o => (o.ProductId, o.Count)).ToList());
                 subject = "Payment Successful";
                 body = $"Thank u for ur payment , ur payment for order {orderId}, total amount={order.TotalAmount}";
             }
