@@ -14,7 +14,7 @@ namespace E_Commerce.DAL.Repository.Interfaces
         public Task<bool> BlockUserAsync(string UserId, int days);
         public Task<bool> UnBlockUserAsync(string UserId);
         public Task<bool> IsBlocked(string UserId);
-
+        public Task<bool> ChangeUserRoleToAdmin(string UserId);
 
     }
 }
