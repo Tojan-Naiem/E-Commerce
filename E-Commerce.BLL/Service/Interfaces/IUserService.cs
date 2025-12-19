@@ -10,6 +10,7 @@ namespace E_Commerce.BLL.Service.Interfaces
     public interface IUserService
     {
         public Task<List<ApplicationUser>> GetAllAsync();
+        public Task<ApplicationUser> GetByIdAsync(string UserId);
 
     }
 }
