@@ -10,9 +10,9 @@ namespace E_Commerce.BLL.Service.Interfaces
 {
     public interface ICartService
     {
-        public Task<bool> AddToCart(CartRequest Cart, string UserId);
-        public Task<CartSummary> GetUserCart(string UserId);
-        public Task<bool> DeleteCart(string UserId);
+        public Task<bool> AddToCartAsync(CartRequest Cart, string UserId);
+        public Task<CartSummary> GetUserCartAsync(string UserId);
+        public Task<bool> DeleteCartAsync(string UserId);
 
     }
 }

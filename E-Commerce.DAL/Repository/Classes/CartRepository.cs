@@ -19,7 +19,7 @@ namespace E_Commerce.DAL.Repository.Classes
         {
             _dbContext = dbContext;
         }
-        public async Task<bool> Add(Cart Cart)
+        public async Task<bool> AddAsync(Cart Cart)
         {
             _dbContext.Cart.Add(Cart);
             await _dbContext.SaveChangesAsync();
@@ -27,18 +27,18 @@ namespace E_Commerce.DAL.Repository.Classes
 
         }
 
-        public async Task<List<Cart>> Get(string UserId)
+        public async Task<List<Cart>> GetAsync(string UserId)
         {
             return await _dbContext.Cart.Include(
                 c => c.Product
                 ).Where(c => c.UserId == UserId).ToListAsync();
             
         }
-        public async Task Delete(Cart Cart)
+        public void DeleteAsync(Cart Cart)
         {
             _dbContext.Cart.Remove(Cart);
         }
-        public async Task SaveChangesInDatabase()
+        public async Task SaveChangesInDatabaseAsync()
         {
             await _dbContext.SaveChangesAsync();
         }

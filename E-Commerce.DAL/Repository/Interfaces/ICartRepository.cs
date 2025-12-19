@@ -11,10 +11,10 @@ namespace E_Commerce.DAL.Repository.Interfaces
 {
     public interface  ICartRepository
     {
-        public Task<bool> Add(Cart Cart);
-        public Task<List<Cart>> Get(string UserId);
-        public Task Delete(Cart Cart);
-        public Task SaveChangesInDatabase();
+        public Task<bool> AddAsync(Cart Cart);
+        public Task<List<Cart>> GetAsync(string UserId);
+        public void DeleteAsync(Cart Cart);
+        public Task SaveChangesInDatabaseAsync();
 
     }
 }
