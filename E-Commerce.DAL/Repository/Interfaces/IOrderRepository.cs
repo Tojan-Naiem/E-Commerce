@@ -14,6 +14,7 @@ namespace E_Commerce.DAL.Repository.Interfaces
         public Task AddOrderItemsAsync(List<OrderItem> orderItems);
         public Task<List<Order>> GetByStatusAsync(OrderStatus status);
         public Task<List<Order>> GetAllWithUserAsync(string UserId);
+        public Task<bool> ChangeStatusAsync(int orderId, OrderStatus newStatus);
 
     }
 }

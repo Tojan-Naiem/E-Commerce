@@ -40,5 +40,14 @@ namespace E_Commerce.DAL.Repository.Classes
         {
             return await _dbContext.Orders.Where(o => o.UserId == UserId).OrderByDescending(O => O.OrderDate).ToListAsync();
         }
+        public async Task<bool>ChangeStatusAsync(int orderId,OrderStatus newStatus)
+        {
+            var order = await _dbContext.Orders.FindAsync(orderId);
+            if (order is null)
+                throw new Exception("there's no order with this id");
+            order.Status = newStatus;
+            var result = await _dbContext.SaveChangesAsync();
+            return result > 0;
+        }
     }
 }
