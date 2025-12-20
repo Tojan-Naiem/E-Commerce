@@ -49,6 +49,8 @@ builder.Services.AddScoped<ICheckOutService, CheckOutService>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 builder.Services.AddScoped<ISeedData,SeedData>();
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(
