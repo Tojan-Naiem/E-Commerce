@@ -18,7 +18,7 @@ namespace E_Commerce.Util
             {
                 EnableSsl = true,
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential("tojan050@gmail.com", "jcyl dfoq utwz ulwp")
+                Credentials = new NetworkCredential("", "")
             };
 
             return client.SendMailAsync(
