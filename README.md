@@ -81,10 +81,6 @@ The project follows a clean three-tier architecture:
 
 ### 1. Clone the Repository
 
-```bash
-git clone <repository-url>
-cd E-Commerce
-```
 
 ### 2. Configure Application Settings
 
@@ -209,10 +205,7 @@ E-Commerce/
 
 The project includes Swagger UI for API testing. Navigate to `/swagger` when the application is running.
 
-### Default Admin Credentials
-After initial seeding, you can login with:
-- **Email**: tojan050@gmail.com
-- **Password**: 123soso@S
+
 
 ## 📝 Localization
 
@@ -250,7 +243,3 @@ Automated emails are sent for:
 - Payment success
 
 
-
-## 📞 Support
-
-For issues and questions, please open an issue in the repository.
